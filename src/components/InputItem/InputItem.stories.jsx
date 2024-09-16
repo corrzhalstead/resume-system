@@ -1,23 +1,8 @@
 import { InputItem } from "./InputItem";
 
 export default {
-  title: "Events/InputItem",
+  title: "components/InputItem",
   component: InputItem,
-  decorators: [
-    (Story) => (
-      <div
-        style={{
-          background: "white",
-          color: "black",
-          width: "100%",
-          height: "100%",
-          padding: "20px",
-        }}
-      >
-        <Story />
-      </div>
-    ),
-  ],
 };
 
 const Template = (args) => <InputItem {...args} />;

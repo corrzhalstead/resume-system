@@ -1,0 +1,41 @@
+/* Select.module.css */
+.container {
+  position: relative;
+  display: inline-block;
+}
+
+.selectButton {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 8px;
+  width: 200px;
+  cursor: pointer;
+}
+
+.chevronIcon {
+  margin-left: 8px;
+}
+
+.dropdown {
+  position: absolute;
+  background-color: white;
+  border: 1px solid #ccc;
+  margin-top: 4px;
+  width: 100%;
+}
+
+.dropdownOption {
+  padding: 8px;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  background-color: white;
+  border: none;
+}
+
+.dropdownOption:hover {
+  background-color: #f0f0f0;
+}
