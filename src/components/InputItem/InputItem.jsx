@@ -12,8 +12,8 @@ export function InputItem({
   placeholder,
   onChange,
   className,
-  onBlur,
-  onFocus,
+  // onBlur,
+  // onFocus,
 }) {
   return (
     <div className={styles.grid}>
@@ -23,8 +23,8 @@ export function InputItem({
         placeholder={placeholder}
         value={value}
         onChange={onChange}
-        onBlur={onBlur}
-        onFocus={onFocus}
+        // onBlur={onBlur}
+        // onFocus={onFocus}
       />
     </div>
   );

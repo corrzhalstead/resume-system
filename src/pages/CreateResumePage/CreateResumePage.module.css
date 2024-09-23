@@ -1,0 +1,38 @@
+.container {
+  background: #fff 0% 0% no-repeat padding-box;
+  letter-spacing: 0px;
+  padding-top: 0;
+  font-weight: normal;
+  /* width: 90%;
+  height: 90vh; */
+  padding: 20px 100px;
+}
+
+.headerContainer {
+  background: #ffff 0% 0% no-repeat padding-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-bottom: 17px;
+  /* border: 1px solid #c5cfd1; */
+  /* padding: 1.5rem 0rem 1.5rem 0.5rem; */
+  position: sticky;
+  top: -3%;
+  width: 100%;
+  z-index: 200;
+}
+
+.title {
+  font-size: 16x;
+  font-weight: 600;
+}
+
+.bodyContainer {
+  padding: 1.5rem;
+  border: 2px solid #c5cfd1;
+  border-radius: 8px;
+}
+
+.cardContainer {
+  margin: 2em 0;
+}

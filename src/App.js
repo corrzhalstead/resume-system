@@ -1,23 +1,17 @@
-// import "./index.css";
-import styles from "./App.module.css";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+
+import "./index.css";
+import { CreateResumePage } from "./pages/CreateResumePage/CreateResumePage";
+import HomePage from "./pages/HomePage";
 
 function App() {
   return (
-    <div className={styles.App}>
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/create" element={<CreateResumePage />} />
+      </Routes>
+    </Router>
   );
 }
 
