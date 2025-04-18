@@ -12,7 +12,7 @@ export function InputItem({
   placeholder,
   onChange,
   className,
-  // onBlur,
+  onBlur,
   // onFocus,
 }) {
   return (
@@ -20,11 +20,15 @@ export function InputItem({
       <span className={styles.label}>{label} </span>
       <input
         className={classNames(styles.input, className)}
+        name={name}
         placeholder={placeholder}
         value={value}
         onChange={onChange}
-        // onBlur={onBlur}
+        onBlur={onBlur}
         // onFocus={onFocus}
+        type={name === "age" ? "number" : "text"}
+        maxLength={name === "birthdate" ? 10 : undefined}
+        inputMode={name === "age" ? "numeric" : "text"}
       />
     </div>
   );

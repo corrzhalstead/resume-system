@@ -33,3 +33,34 @@
 .nameContainer > div {
   flex: 1;
 }
+
+.birtDateContainer {
+  display: flex;
+  /* justify-content: space-between; */
+  align-items: center;
+
+  gap: 60px;
+  width: 100%;
+  margin-bottom: 25px;
+}
+
+.birtDateContainer,
+.addressContainer,
+.contactInfoContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  gap: 60px;
+  width: 100%;
+  margin-bottom: 25px;
+}
+
+.addressContainer > div,
+.birtDateContainer > div {
+  flex: 1;
+}
+
+.contactInfoContainer > div {
+  flex: 1;
+}
