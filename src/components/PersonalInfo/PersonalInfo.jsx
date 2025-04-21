@@ -6,9 +6,19 @@ import styles from "./PersonalInfo.module.css";
 import InputItem from "../InputItem";
 import RadioButtonList from "../RadioButtonList";
 import Dropdown from "../Dropdown";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSquarePlus } from "@fortawesome/free-solid-svg-icons";
 
 export function PersonalInfo({ personalInfo }) {
   const [gender, setGender] = useState("");
+
+  const [certificates, setCertificates] = useState([
+    { certificate: "", year: "" },
+  ]);
+
+  const [employments, setEmployments] = useState([
+    { companyName: "", position: "", yearStarted: "", yearEnd: "" },
+  ]);
 
   const [formData, setFormData] = useState({
     firstName: "",
@@ -51,7 +61,7 @@ export function PersonalInfo({ personalInfo }) {
         ...prev,
         [name]: numericValue.slice(0, 10), // Limit to 10 characters (MM/DD/YYYY)
       }));
-    } else if (name === "age") {
+    } else if (name === "age" || name === "yearGraduated") {
       const numericValue = value.replace(/\D/g, ""); // Remove non-numeric characters
       setFormData((prev) => ({
         ...prev,
@@ -111,6 +121,29 @@ export function PersonalInfo({ personalInfo }) {
     }));
   };
 
+  const handleAddCertificate = () => {
+    setCertificates([...certificates, { certificate: "", year: "" }]);
+  };
+
+  const handleCertificateChange = (index, field, value) => {
+    const updated = [...certificates];
+    updated[index][field] = value;
+    setCertificates(updated);
+  };
+
+  const handleAddEmployment = () => {
+    setEmployments([
+      ...employments,
+      { companyName: "", position: "", yearStarted: "", yearEnd: "" },
+    ]);
+  };
+
+  const handleEmploymentChange = (index, field, value) => {
+    const updated = [...employments];
+    updated[index][field] = value;
+    setEmployments(updated);
+  };
+
   return (
     <div className={styles.container}>
       <h3>Personal Information</h3>
@@ -160,12 +193,28 @@ export function PersonalInfo({ personalInfo }) {
             onChange={handleInputChange}
           />
 
-          <div className={styles.genderConta}>
+          <div className={styles.genderContainer}>
             <RadioButtonList
               onClick={handleSelection}
               options={["Male", "Female"]}
             />
           </div>
+
+          {/* <label>Marital Status</label> */}
+          <Dropdown
+            label="Status"
+            name="status"
+            value={formData.status}
+            onChange={handleInputChange}
+            options={[
+              "Single",
+              "Married",
+              "Widowed",
+              "Annulled",
+              "Separated",
+              "Other",
+            ]}
+          />
         </div>
       </div>
 
@@ -218,7 +267,7 @@ export function PersonalInfo({ personalInfo }) {
 
       <h3>Education Background </h3>
 
-      <div>
+      <div className={styles.dropdown}>
         <Dropdown
           label="Highest Level of Education"
           name="highestEducation"
@@ -229,10 +278,125 @@ export function PersonalInfo({ personalInfo }) {
             "Associate's Degree",
             "Bachelor's Degree",
             "Master's Degree",
-            "Doctorate (PhD)",
             "Other",
           ]}
         />
+      </div>
+      <div className={styles.schoolContainer}>
+        <InputItem
+          label="School Name"
+          name="schoolName"
+          value={formData.schoolName}
+          placeholder="Enter your school name"
+          onChange={handleInputChange}
+        />
+
+        <InputItem
+          label="Year Graduated"
+          name="yearGraduated"
+          value={formData.yearGraduated}
+          placeholder="Enter year graduated"
+          onChange={handleInputChange}
+        />
+      </div>
+
+      <div className={styles.certificateContainer}>
+        {certificates.map((item, index) => (
+          <div key={index} className={styles.inputRow}>
+            <InputItem
+              label="Certificate(s) Received"
+              name={`certificate${index}`}
+              value={item.certificate}
+              placeholder="Name of certificate"
+              onChange={(e) =>
+                handleCertificateChange(index, "certificate", e.target.value)
+              }
+              className={styles.certificateInput}
+            />
+            <InputItem
+              label="Year Received"
+              name={`year${index}`}
+              value={item.year}
+              placeholder="Year received"
+              onChange={(e) =>
+                handleCertificateChange(index, "year", e.target.value)
+              }
+            />
+
+            {index === certificates.length - 1 && (
+              <div>
+                <button
+                  className={styles.addButton}
+                  onClick={handleAddCertificate}
+                >
+                  <FontAwesomeIcon icon={faSquarePlus} />
+                </button>
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+
+      <h3>Employment Record </h3>
+
+      {/* <div> */}
+      <div className={styles.certificateContainer}>
+        {employments.map((item, index) => (
+          <div key={index} className={styles.companyRow}>
+            <InputItem
+              label="Company Name"
+              name={`companyName${index}`}
+              value={item.companyName}
+              placeholder="Enter company name"
+              onChange={(e) =>
+                handleEmploymentChange(index, "companyName", e.target.value)
+              }
+            />
+            {/* </div> */}
+
+            {/* <div className={styles.addressContainer}> */}
+            <InputItem
+              label="Position"
+              name={`position${index}`}
+              value={item.position}
+              placeholder="Enter company position"
+              onChange={(e) =>
+                handleEmploymentChange(index, "position", e.target.value)
+              }
+            />
+
+            <InputItem
+              label="Year Started"
+              name={`yearStarted${index}`}
+              value={item.yearStarted}
+              placeholder="Enter year started"
+              onChange={(e) =>
+                handleEmploymentChange(index, "yearStarted", e.target.value)
+              }
+            />
+
+            <InputItem
+              label="Year Ended"
+              name={`yearEnd${index}`}
+              value={item.yearEnd}
+              placeholder="Enter year end"
+              onChange={(e) =>
+                handleEmploymentChange(index, "yearEnd", e.target.value)
+              }
+            />
+
+            {index === employments.length - 1 && (
+              <div>
+                <button
+                  className={styles.addButton}
+                  onClick={handleAddEmployment}
+                >
+                  <FontAwesomeIcon icon={faSquarePlus} />
+                </button>
+              </div>
+            )}
+          </div>
+        ))}
       </div>
     </div>
   );
