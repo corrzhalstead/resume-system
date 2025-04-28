@@ -3,15 +3,17 @@ import PropTypes from "prop-types";
 import styles from "./Button.module.css";
 
 // Custom Button
-export const Button = ({ label, onClick }) => {
+export function Button({ label, onClick, className }) {
   return (
-    <button className={styles.button} onClick={onClick}>
+    <button onClick={onClick} className={`${className} ${styles.button}`}>
       {label}
     </button>
   );
-};
+}
 
 Button.propTypes = {
   label: PropTypes.string,
   onClick: PropTypes.func,
 };
+
+export default Button;

@@ -36,3 +36,32 @@
 .cardContainer {
   margin: 2em 0;
 }
+
+.button {
+  /* background: #007bff; */
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 100px;
+  margin-bottom: 50px;
+  gap: 20px;
+}
+
+.saveBtn {
+  background: #007bff;
+  color: white;
+  width: 150px;
+  border: #007bff;
+}
+
+.cancelBtn {
+  background: #cdcdcd !important;
+  color: #000000 !important;
+  width: 150px;
+  border: #cdcdcd;
+}
+
+.saveBtn:hover,
+.cancelBtn:hover {
+  opacity: 0.8;
+}

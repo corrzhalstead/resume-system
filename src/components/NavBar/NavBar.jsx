@@ -10,16 +10,21 @@ export function NavBar() {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
+    const token = localStorage.getItem("token");
+
     if (token) {
       try {
         const decoded = jwtDecode(token);
         setUser(decoded);
       } catch (error) {
-        console.error("Invalid token");
+        console.error("Invalid token", error);
         setUser(null);
+        localStorage.removeItem("token");
       }
+    } else {
+      setUser(null);
     }
-  }, [token]);
+  }, []);
 
   const handleLogout = () => {
     localStorage.removeItem("token");

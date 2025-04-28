@@ -4,83 +4,31 @@ import styles from "./HomePage.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 
-// export function HomePage() {
-//   const navigate = useNavigate();
-//   const token = localStorage.getItem("token");
-
-//   return (
-//     <div className={styles.container}>
-//       <div className={styles.topContainer}>
-//         <h1>Welcome to HireFlow</h1>
-//         <p className={styles.description}>
-//           Track applications, schedule interviews, and manage your hiring
-//           pipeline with HireFlow.
-//           {/* Track applicants and manage hiring seamlessly */}
-//         </p>
-
-//         {token ? (
-//           <>
-//             <div className={styles.actions}>
-//               <button
-//                 onClick={() => navigate("/dashboard")}
-//                 className={styles.button}
-//               >
-//                 <span className={styles.icon}>📊 </span>Go to Dashboard
-//               </button>
-//               <button
-//                 onClick={() => navigate("/add-applicant")}
-//                 className={styles.button}
-//               >
-//                 <span className={styles.icon}>➕ </span>Add New Applicant
-//               </button>
-//             </div>
-//             {/*
-//           {applicantStats && (
-//             <div style={styles.stats}>
-//               <h2>Applicant Overview</h2>
-//               <ul>
-//                 <li>Pending: {applicantStats.pending} 🔵</li>
-//                 <li>Interviewing: {applicantStats.interviewing} 🟠</li>
-//                 <li>Hired: {applicantStats.hired} ✅</li>
-//                 <li>Rejected: {applicantStats.rejected} ❌</li>
-//               </ul>
-//             </div>
-//           )} */}
-//           </>
-//         ) : (
-//           <div className={styles.actions}>
-//             <Link to="/signIn" className={styles.button}>
-//               <span className={styles.icon}>🔑 </span>Sign In to Get Started
-//             </Link>
-
-//             <p className={styles.noAccountText}>No account yet?</p>
-
-//             <Link to="/signup" className={styles.buttonSignUp}>
-//               <span className={styles.icon}>📝 </span>Sign Up
-//             </Link>
-//           </div>
-//         )}
-//       </div>
-//     </div>
-//   );
-// }
-
 export function HomePage() {
   const navigate = useNavigate();
-  const token = localStorage.getItem("token");
+  // const token = localStorage.getItem("token");
   const [user, setUser] = useState(null);
 
   useEffect(() => {
+    const token = localStorage.getItem("token");
+    const dummyJwt =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9." +
+      "eyJuYW1lIjoiVGVzdCBVc2VyIn0." +
+      "dummysignature";
+
     if (token) {
       try {
         const decoded = jwtDecode(token);
-        setUser(decoded); // Store user details from token
+        setUser(decoded);
       } catch (error) {
-        console.error("Invalid token");
+        console.error("Invalid token", error);
         setUser(null);
+        localStorage.removeItem("token", dummyJwt);
       }
+    } else {
+      setUser(null);
     }
-  }, [token]);
+  }, []);
 
   return (
     <div className={styles.container}>
@@ -91,7 +39,7 @@ export function HomePage() {
           pipeline with HireFlow.
         </p>
 
-        {token ? (
+        {user ? (
           <>
             <h2 className={styles.welcomeUser}>
               👋 Welcome, {user?.name || "User"}!
@@ -108,6 +56,14 @@ export function HomePage() {
                 className={styles.button}
               >
                 <span className={styles.icon}>➕ </span>Add New Applicant
+              </button>
+
+              <button
+                // onClick={() => navigate("/edit-resume/:id")}
+                onClick={() => navigate("/edit-resume")}
+                className={styles.button}
+              >
+                <span className={styles.icon}>➕ </span>Edit Applicant Resume
               </button>
             </div>
           </>

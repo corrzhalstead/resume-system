@@ -1,0 +1,136 @@
+.container {
+  /* background-color: inherit; */
+  border: 1px solid #cdcdcdcd;
+  border-radius: 8px;
+  color: black;
+  text-align: left;
+  padding: 16px 28px 16px 28px;
+  width: 100%;
+  min-height: 100%;
+}
+
+.cardContents {
+  align-items: center;
+  display: grid;
+  grid-template-columns: 9% 40% 20% 18% auto;
+  width: 100%;
+  font-size: 1em;
+}
+
+.styledDateContainer {
+  text-align: center;
+  width: fit-content;
+  margin-top: 6px;
+}
+
+.dateAndImageContainer {
+  display: grid;
+  grid-template-columns: auto auto;
+  margin-right: 6px;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.day {
+  font-weight: bold;
+  color: var(--color-surface-yellow);
+  font-size: 30px;
+}
+
+.eventInfoItem,
+.eventInfoName {
+  margin-top: 4px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.eventInfoDate {
+  font-weight: lighter;
+  font-style: italic;
+  margin-top: 4px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.ticketsSoldInfo {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  width: 100px;
+}
+
+.majorEvent {
+  background-color: var(--color-bg-accent);
+}
+
+.localEvent {
+  background-color: var(--color-surface-yellow);
+}
+
+.LOS {
+  background-color: var(--color-button-default);
+}
+
+@media (min-width: 1541px) and (max-width: 1650px) {
+  .eventInfoItem {
+    max-width: 290px;
+  }
+}
+
+@media (min-width: 1430px) and (max-width: 1540px) {
+  .eventCardContents {
+    grid-template-columns: 11% 35% 22% 20% auto;
+  }
+}
+
+@media (min-width: 1340px) and (max-width: 1429px) {
+  .eventInfoDate {
+    max-width: 180px;
+  }
+
+  .eventCardContents {
+    grid-template-columns: 11% 35% 20% 20% auto;
+  }
+}
+
+@media (min-width: 1280px) and (max-width: 1339.98px) {
+  .eventInfoDate {
+    max-width: 200px;
+  }
+
+  .eventCardContents {
+    grid-template-columns: 12% 35% 23% 17% auto;
+  }
+}
+
+@media (min-width: 1201px) and (max-width: 1279px) {
+  .eventCardContents {
+    grid-template-columns: 13% 35% 23% 15% auto;
+    font-size: 15px;
+  }
+
+  .status {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 80px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .eventCardContents {
+    grid-template-columns: 14% 28% 25% 16% auto;
+
+    font-size: 14px;
+  }
+
+  .status {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 80px;
+  }
+}

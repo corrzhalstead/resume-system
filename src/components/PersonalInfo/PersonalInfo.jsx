@@ -8,10 +8,9 @@ import RadioButtonList from "../RadioButtonList";
 import Dropdown from "../Dropdown";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSquarePlus } from "@fortawesome/free-solid-svg-icons";
+import { faSquareMinus } from "@fortawesome/free-solid-svg-icons";
 
-export function PersonalInfo({ personalInfo }) {
-  const [gender, setGender] = useState("");
-
+export function PersonalInfo({ personalInfo, onChange, onBlur, onSelect }) {
   const [certificates, setCertificates] = useState([
     { certificate: "", year: "" },
   ]);
@@ -20,107 +19,7 @@ export function PersonalInfo({ personalInfo }) {
     { companyName: "", position: "", yearStarted: "", yearEnd: "" },
   ]);
 
-  const [formData, setFormData] = useState({
-    firstName: "",
-    middleName: "",
-    lastName: "",
-    gender: "",
-    birthdate: "",
-    age: "",
-  });
-
-  useEffect(() => {
-    if (personalInfo) {
-      setFormData({
-        firstName: personalInfo.firstName || "",
-        middleName: personalInfo.middleName || "",
-        lastName: personalInfo.lastName || "",
-        gender: personalInfo.gender || "",
-        birthdate: personalInfo.birthdate || "",
-        age: personalInfo.age || "",
-      });
-    }
-  }, [personalInfo]);
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-
-    if (name === "birthdate") {
-      let numericValue = value.replace(/\D/g, ""); // Remove non-numeric characters
-
-      if (numericValue.length > 2 && numericValue.length <= 4) {
-        numericValue = numericValue.replace(/(\d{2})(\d{1,2})/, "$1/$2"); // Format MM/DD
-      } else if (numericValue.length > 4) {
-        numericValue = numericValue.replace(
-          /(\d{2})(\d{2})(\d{1,4})/,
-          "$1/$2/$3"
-        ); // Format MM/DD/YYYY
-      }
-
-      setFormData((prev) => ({
-        ...prev,
-        [name]: numericValue.slice(0, 10), // Limit to 10 characters (MM/DD/YYYY)
-      }));
-    } else if (name === "age" || name === "yearGraduated") {
-      const numericValue = value.replace(/\D/g, ""); // Remove non-numeric characters
-      setFormData((prev) => ({
-        ...prev,
-        [name]: numericValue,
-      }));
-    } else if (name === "phone") {
-      let numericValue = value.replace(/\D/g, ""); // Remove all non-numeric characters
-
-      if (numericValue.length > 4 && numericValue.length <= 7) {
-        numericValue = numericValue.replace(/(\d{4})(\d{1,3})/, "$1-$2"); // Format 0917-XXX
-      } else if (numericValue.length > 7) {
-        numericValue = numericValue.replace(
-          /(\d{4})(\d{3})(\d{1,4})/,
-          "$1-$2-$3"
-        ); // Format 0917-215-5050
-      }
-
-      setFormData((prev) => ({
-        ...prev,
-        [name]: numericValue.slice(0, 13), // Limit to 13 characters (XXXX-XXX-XXXX)
-      }));
-    } else {
-      setFormData((prev) => ({
-        ...prev,
-        [name]: value,
-      }));
-    }
-  };
-
-  const handleBlur = (e) => {
-    const { name, value } = e.target;
-
-    if (name === "birthdate" && value.length === 10) {
-      const [month, day, year] = value.split("/");
-
-      if (
-        parseInt(month) < 1 ||
-        parseInt(month) > 12 ||
-        parseInt(day) < 1 ||
-        parseInt(day) > 31 ||
-        parseInt(year) < 1900 ||
-        parseInt(year) > new Date().getFullYear()
-      ) {
-        alert("Invalid date. Please enter a valid MM/DD/YYYY format.");
-        setFormData((prev) => ({
-          ...prev,
-          [name]: "",
-        }));
-      }
-    }
-  };
-
-  const handleSelection = (selection) => {
-    setFormData((prev) => ({
-      ...prev,
-      gender: selection,
-    }));
-  };
-
+  //Adding more certificates
   const handleAddCertificate = () => {
     setCertificates([...certificates, { certificate: "", year: "" }]);
   };
@@ -131,11 +30,25 @@ export function PersonalInfo({ personalInfo }) {
     setCertificates(updated);
   };
 
+  //Removing certificate/s
+  const handleRemoveCertificate = (indexToRemove) => {
+    setCertificates((prevCertificates) =>
+      prevCertificates.filter((_, index) => index !== indexToRemove)
+    );
+  };
+
   const handleAddEmployment = () => {
     setEmployments([
       ...employments,
       { companyName: "", position: "", yearStarted: "", yearEnd: "" },
     ]);
+  };
+
+  //Removing certificate/s
+  const handleRemoveEmployment = (indexToRemove) => {
+    setEmployments((prev) =>
+      prev.filter((_, index) => index !== indexToRemove)
+    );
   };
 
   const handleEmploymentChange = (index, field, value) => {
@@ -148,75 +61,76 @@ export function PersonalInfo({ personalInfo }) {
     <div className={styles.container}>
       <h3>Personal Information</h3>
 
-      <div className={styles.content}>
-        <div className={styles.nameContainer}>
-          <InputItem
-            label="First Name"
-            name="firstName"
-            value={formData.firstName}
-            placeholder="Enter first name"
-            onChange={handleInputChange}
-          />
+      {/* <div className={styles.content}> */}
+      <div className={styles.nameContainer}>
+        <InputItem
+          label="First Name"
+          name="firstName"
+          value={personalInfo.firstName}
+          placeholder="First name"
+          onChange={onChange}
+        />
 
-          <InputItem
-            label="Middle Name"
-            name="middleName"
-            value={formData.middleName}
-            placeholder="Enter middle name"
-            onChange={handleInputChange}
-          />
+        <InputItem
+          label="Middle Name"
+          name="middleName"
+          value={personalInfo.middleName}
+          placeholder="Middle name"
+          onChange={onChange}
+        />
 
-          <InputItem
-            label="Last Name"
-            name="lastName"
-            value={formData.lastName}
-            placeholder="Enter last name"
-            onChange={handleInputChange}
-          />
-        </div>
-
-        <div className={styles.birtDateContainer}>
-          <InputItem
-            label="Birthdate"
-            name="birthdate"
-            value={formData.birthdate}
-            placeholder="MM/DD/YYYY"
-            onChange={handleInputChange}
-            onBlur={handleBlur}
-          />
-
-          <InputItem
-            label="Age"
-            name="age"
-            value={formData.age}
-            placeholder="Enter your age"
-            onChange={handleInputChange}
-          />
-
-          <div className={styles.genderContainer}>
-            <RadioButtonList
-              onClick={handleSelection}
-              options={["Male", "Female"]}
-            />
-          </div>
-
-          {/* <label>Marital Status</label> */}
-          <Dropdown
-            label="Status"
-            name="status"
-            value={formData.status}
-            onChange={handleInputChange}
-            options={[
-              "Single",
-              "Married",
-              "Widowed",
-              "Annulled",
-              "Separated",
-              "Other",
-            ]}
-          />
-        </div>
+        <InputItem
+          label="Last Name"
+          name="lastName"
+          value={personalInfo.lastName}
+          placeholder="Last name"
+          onChange={onChange}
+        />
       </div>
+
+      <div className={styles.birthDateContainer}>
+        {/* <div> */}
+        <InputItem
+          label="Birthdate"
+          name="birthdate"
+          value={personalInfo.birthdate}
+          placeholder="MM/DD/YYYY"
+          onChange={onChange}
+          onBlur={onBlur}
+        />
+
+        <InputItem
+          label="Age"
+          name="age"
+          value={personalInfo.age}
+          placeholder="Age"
+          onChange={onChange}
+        />
+        {/* </div> */}
+
+        {/* <div className={styles.genderContainer}> */}
+        <div className={styles.radioList}>
+          <RadioButtonList onClick={onSelect} options={["Male", "Female"]} />
+        </div>
+
+        {/* <label>Marital Status</label> */}
+        <Dropdown
+          label="Status"
+          name="status"
+          value={personalInfo.status}
+          onChange={onChange}
+          options={[
+            "Single",
+            "Married",
+            "Widowed",
+            "Annulled",
+            "Separated",
+            "Other",
+          ]}
+        />
+      </div>
+      {/* </div> */}
+      {/* </div> */}
 
       <h3>Contact Information</h3>
 
@@ -225,42 +139,42 @@ export function PersonalInfo({ personalInfo }) {
           <InputItem
             label="Street Address"
             name="address"
-            value={formData.Address}
-            placeholder="Enter your address"
-            onChange={handleInputChange}
+            value={personalInfo.address}
+            placeholder="Street Address"
+            onChange={onChange}
           />
 
           <InputItem
             label="City"
             name="city"
-            value={formData.city}
-            placeholder="Enter your city"
-            onChange={handleInputChange}
+            value={personalInfo.city}
+            placeholder="City"
+            onChange={onChange}
           />
 
           <InputItem
             label="Province"
             name="province"
-            value={formData.province}
-            placeholder="Enter your province"
-            onChange={handleInputChange}
+            value={personalInfo.province}
+            placeholder="Province"
+            onChange={onChange}
           />
         </div>
         <div className={styles.contactInfoContainer}>
           <InputItem
             label="Email Address"
             name="email"
-            value={formData.email}
-            placeholder="Enter your email address"
-            onChange={handleInputChange}
+            value={personalInfo.email}
+            placeholder="Email address"
+            onChange={onChange}
           />
 
           <InputItem
             label="Phone Number"
             name="phone"
-            value={formData.phone}
-            placeholder="Enter your phone number"
-            onChange={handleInputChange}
+            value={personalInfo.phone}
+            placeholder="Phone number"
+            onChange={onChange}
           />
         </div>
       </div>
@@ -271,8 +185,8 @@ export function PersonalInfo({ personalInfo }) {
         <Dropdown
           label="Highest Level of Education"
           name="highestEducation"
-          value={formData.highestEducation}
-          onChange={handleInputChange}
+          value={personalInfo.highestEducation}
+          onChange={onChange}
           options={[
             "High School Diploma",
             "Associate's Degree",
@@ -280,23 +194,24 @@ export function PersonalInfo({ personalInfo }) {
             "Master's Degree",
             "Other",
           ]}
+          className={styles.dropdownEduc}
         />
       </div>
       <div className={styles.schoolContainer}>
         <InputItem
           label="School Name"
           name="schoolName"
-          value={formData.schoolName}
-          placeholder="Enter your school name"
-          onChange={handleInputChange}
+          value={personalInfo.schoolName}
+          placeholder="School name"
+          onChange={onChange}
         />
 
         <InputItem
           label="Year Graduated"
           name="yearGraduated"
-          value={formData.yearGraduated}
-          placeholder="Enter year graduated"
-          onChange={handleInputChange}
+          value={personalInfo.yearGraduated}
+          placeholder="Year graduated"
+          onChange={onChange}
         />
       </div>
 
@@ -323,8 +238,21 @@ export function PersonalInfo({ personalInfo }) {
               }
             />
 
+            {/* Always show remove (-) button if more than 1 certificate */}
+            {index !== certificates.length - 1 && (
+              <div className={styles.button}>
+                <button
+                  className={styles.removeButton}
+                  onClick={() => handleRemoveCertificate(index)}
+                  // type="button"
+                >
+                  <FontAwesomeIcon icon={faSquareMinus} />
+                </button>
+              </div>
+            )}
+
             {index === certificates.length - 1 && (
-              <div>
+              <div className={styles.button}>
                 <button
                   className={styles.addButton}
                   onClick={handleAddCertificate}
@@ -343,11 +271,12 @@ export function PersonalInfo({ personalInfo }) {
       <div className={styles.certificateContainer}>
         {employments.map((item, index) => (
           <div key={index} className={styles.companyRow}>
+            {/* <div> */}
             <InputItem
               label="Company Name"
               name={`companyName${index}`}
               value={item.companyName}
-              placeholder="Enter company name"
+              placeholder="Company name"
               onChange={(e) =>
                 handleEmploymentChange(index, "companyName", e.target.value)
               }
@@ -359,17 +288,18 @@ export function PersonalInfo({ personalInfo }) {
               label="Position"
               name={`position${index}`}
               value={item.position}
-              placeholder="Enter company position"
+              placeholder="Position"
               onChange={(e) =>
                 handleEmploymentChange(index, "position", e.target.value)
               }
             />
+            {/* </div> */}
 
             <InputItem
               label="Year Started"
               name={`yearStarted${index}`}
               value={item.yearStarted}
-              placeholder="Enter year started"
+              placeholder="Year started"
               onChange={(e) =>
                 handleEmploymentChange(index, "yearStarted", e.target.value)
               }
@@ -379,14 +309,27 @@ export function PersonalInfo({ personalInfo }) {
               label="Year Ended"
               name={`yearEnd${index}`}
               value={item.yearEnd}
-              placeholder="Enter year end"
+              placeholder="Year end"
               onChange={(e) =>
                 handleEmploymentChange(index, "yearEnd", e.target.value)
               }
             />
 
+            {/* Always show remove (-) button if more than 1 certificate */}
+            {index !== employments.length - 1 && (
+              <div className={styles.button}>
+                <button
+                  className={styles.removeButton}
+                  onClick={() => handleRemoveEmployment(index)}
+                  // type="button"
+                >
+                  <FontAwesomeIcon icon={faSquareMinus} />
+                </button>
+              </div>
+            )}
+
             {index === employments.length - 1 && (
-              <div>
+              <div className={styles.button}>
                 <button
                   className={styles.addButton}
                   onClick={handleAddEmployment}
@@ -402,18 +345,18 @@ export function PersonalInfo({ personalInfo }) {
   );
 }
 
-PersonalInfo.propTypes = {
-  personalInfo: {
-    label: PropTypes.string,
-    value: PropTypes.string,
-    placeholder: PropTypes.string,
-    onChange: PropTypes.func,
+// PersonalInfo.propTypes = {
+//   personalInfo: {
+//     label: PropTypes.string,
+//     value: PropTypes.string,
+//     placeholder: PropTypes.string,
+//     onChange: PropTypes.func,
 
-    firstName: PropTypes.string,
-    middleName: PropTypes.string,
-    lastName: PropTypes.string,
-    gender: PropTypes.string,
-    birthdate: PropTypes.string,
-    age: PropTypes.string,
-  },
-};
+//     firstName: PropTypes.string,
+//     middleName: PropTypes.string,
+//     lastName: PropTypes.string,
+//     gender: PropTypes.string,
+//     birthdate: PropTypes.string,
+//     age: PropTypes.string,
+//   },
+// };

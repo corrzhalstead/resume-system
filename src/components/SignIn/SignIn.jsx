@@ -3,7 +3,7 @@ import styles from "./SignIn.module.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-function SignIn() {
+export function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -32,13 +32,18 @@ function SignIn() {
     // Dummy user credentials
     const dummyUser = {
       email: "test@hireflow.com",
-      password: "password123",
+      password: "password.1212.abc",
     };
+
+    const dummyJwt =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9." +
+      "eyJuYW1lIjoiVGVzdCBVc2VyIn0." +
+      "dummySignature";
 
     if (email === dummyUser.email && password === dummyUser.password) {
       // Simulate token storage (replace with real JWT later)
-      localStorage.setItem("token", "dummy-token");
-      navigate("/dashboard");
+      localStorage.setItem("token", dummyJwt);
+      navigate("/");
     } else {
       setError("Invalid email or password.");
     }

@@ -2,12 +2,12 @@
   background-color: #1ea7fd;
   color: white;
   padding: 10px 20px;
-  border: none;
-  border-radius: 4px;
+  border-radius: 8px;
   font-size: 16px;
   cursor: pointer;
+  /* height: 40px !important; */
 }
 
 .button:hover {
-  background-color: #007bff;
+  opacity: 0.8;
 }
