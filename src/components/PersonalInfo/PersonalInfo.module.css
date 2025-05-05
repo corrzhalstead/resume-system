@@ -71,6 +71,15 @@
   margin-bottom: 25px;
 }
 
+.yearGraduated {
+  width: 320px;
+}
+
+.jobCategoryContainer {
+  display: flex;
+  gap: 70px;
+}
+
 .certificateContainer {
   display: flex;
   flex-direction: column;
@@ -78,7 +87,7 @@
   width: 100%;
 }
 
-.inputRow {
+.inputCertificateRow {
   display: grid;
   grid-template-columns: 48% 25% auto;
   flex-direction: column;
@@ -125,19 +134,29 @@
   color: red;
 }
 
-@media (min-width: 1521px) and (max-width: 1621px) {
+@media (min-width: 1444.98px) and (max-width: 1621px) {
   .birthDateContainer {
     display: grid;
-    grid-template-columns: 14% 12.5% 30% auto;
+    grid-template-columns: 14% 11.5% 30% auto;
+  }
+
+  .companyRow {
+    display: grid;
+    grid-template-columns: 30% 25% 15% 15% auto;
+    gap: 20px;
+  }
+
+  .button {
+    margin-left: 20px;
   }
 }
 
-@media (min-width: 1444.98px) and (max-width: 1520.98px) {
+/* @media (min-width: 1444.98px) and (max-width: 1520.98px) {
   .birthDateContainer {
     display: grid;
     grid-template-columns: 13% 12.5% 30% auto;
   }
-}
+} */
 
 @media (min-width: 1386.98px) and (max-width: 1444px) {
   .birthDateContainer {
@@ -170,26 +189,50 @@
   .birthDateContainer > *:nth-child(4) {
     flex: 1 1 45%;
   }
+
+  .inputCertificateRow {
+    display: grid;
+    grid-template-columns: 47% 28% auto;
+  }
 }
 
 @media (min-width: 1074.98px) and (max-width: 1340px) {
   .companyRow {
     display: grid;
-    grid-template-columns: 30% 25% 15% 15% auto;
+    grid-template-columns: 25% 25% 15% 15% auto;
     gap: 30px;
+  }
+
+  .button {
+    margin-left: 20px;
   }
 }
 
 @media (max-width: 1074px) {
   .companyRow {
     display: grid;
-    grid-template-columns: 30% 25% 15% 15% auto;
+    grid-template-columns: 30% 25% 12% 15% auto;
     gap: 20px;
   }
 
   .addButton,
   .removeButton {
     margin-left: 10px;
+  }
+
+  .jobCategoryContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .monthYearPicker {
+    width: 100px;
+  }
+
+  .button {
+    margin-left: -20px;
   }
 }
 
@@ -207,8 +250,8 @@
     flex: none;
   }
 
-  /* .birthDateContainer {
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-  } */
+  .inputCertificateRow {
+    display: grid;
+    grid-template-columns: 46% 30% auto;
+  }
 }

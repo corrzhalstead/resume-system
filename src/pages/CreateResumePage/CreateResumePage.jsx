@@ -43,6 +43,8 @@ export function CreateResumePage({ isEdit = false }) {
         highestEducation: personalInfo.highestEducation || "",
         schoolName: personalInfo.schoolName || "",
         yearGraduated: personalInfo.yearGraduated || "",
+        jobCategory: personalInfo.jobCategory || "",
+        jobTitle: personalInfo.jobTitle || "",
       });
     }
   }, []);

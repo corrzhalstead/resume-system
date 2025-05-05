@@ -1,4 +1,4 @@
-const dummyResumes = [
+const dummyData = [
   {
     id: 1,
     firstName: "John",
@@ -20,11 +20,13 @@ const dummyResumes = [
     employments: [
       {
         companyName: "Example Corp",
-        position: "Developer",
+        position: "Electrician",
         yearStarted: "2013",
         yearEnd: "2016",
       },
     ],
+    jobCategory: "Skilled Worker",
+    jobTitle: "Electrician",
   },
   {
     id: 2,
@@ -48,10 +50,12 @@ const dummyResumes = [
       {
         companyName: "FinancePro",
         position: "Accountant",
-        yearStarted: "2011",
-        yearEnd: "2018",
+        yearStarted: "Jan 2011",
+        yearEnd: "December 2018",
       },
     ],
+    jobCategory: "Professional",
+    jobTitle: "Accountant",
   },
   {
     id: 3,
@@ -75,10 +79,12 @@ const dummyResumes = [
       {
         companyName: "Techy",
         position: "Cloud Engineer",
-        yearStarted: "2010",
-        yearEnd: "2020",
+        yearStarted: "February 2010",
+        yearEnd: "December 2020",
       },
     ],
+    jobCategory: "Professional",
+    jobTitle: "Cloud Engineer",
   },
   {
     id: 4,
@@ -104,10 +110,12 @@ const dummyResumes = [
       {
         companyName: "Creative Studio",
         position: "Designer",
-        yearStarted: "2015",
-        yearEnd: "Present",
+        yearStarted: "March 2015",
+        yearEnd: "May 2025",
       },
     ],
+    jobCategory: "Professional",
+    jobTitle: "Graphic Designer",
   },
   {
     id: 5,
@@ -135,6 +143,8 @@ const dummyResumes = [
         yearEnd: "2019",
       },
     ],
+    jobCategory: "Technical",
+    jobTitle: "IT Support",
   },
   {
     id: 6,
@@ -164,6 +174,8 @@ const dummyResumes = [
         yearEnd: "Present",
       },
     ],
+    jobCategory: "Administrative",
+    jobTitle: "HR Admin",
   },
   {
     id: 7,
@@ -191,6 +203,8 @@ const dummyResumes = [
         yearEnd: "2022",
       },
     ],
+    jobCategory: "Technical",
+    jobTitle: "Data Analyst",
   },
   {
     id: 8,
@@ -220,6 +234,8 @@ const dummyResumes = [
         yearEnd: "Present",
       },
     ],
+    jobCategory: "Technical",
+    jobTitle: "Marketing Spcialist",
   },
   {
     id: 9,
@@ -235,18 +251,20 @@ const dummyResumes = [
     province: "OR",
     email: "david.rodriguez@example.com",
     phone: "0917-901-2345",
-    highestEducation: "Bachelor's Degree",
+    highestEducation: "High School",
     schoolName: "Portland State",
     yearGraduated: "2014",
-    certificates: [{ certificate: "Business Administration", year: "2015" }],
+    certificates: [],
     employments: [
       {
         companyName: "BizPro",
-        position: "Business Analyst",
-        yearStarted: "2015",
-        yearEnd: "2020",
+        position: "Welder",
+        yearStarted: "Agust 2015",
+        yearEnd: "December 2020",
       },
     ],
+    jobCategory: "Skilled",
+    jobTitle: "Welder",
   },
   {
     id: 10,
@@ -265,9 +283,7 @@ const dummyResumes = [
     highestEducation: "Bachelor's Degree",
     schoolName: "Georgia Tech",
     yearGraduated: "2015",
-    certificates: [
-      { certificate: "Cybersecurity Certification", year: "2019" },
-    ],
+    certificates: [],
     employments: [
       {
         companyName: "SecureNet",
@@ -276,6 +292,8 @@ const dummyResumes = [
         yearEnd: "Present",
       },
     ],
+    jobCategory: "Professional",
+    jobTitle: "Accountant",
   },
   {
     id: 11,
@@ -305,6 +323,8 @@ const dummyResumes = [
         yearEnd: "Present",
       },
     ],
+    jobCategory: "Professional",
+    jobTitle: "Accountant",
   },
   {
     id: 12,
@@ -334,6 +354,8 @@ const dummyResumes = [
         yearEnd: "Present",
       },
     ],
+    jobCategory: "Professional",
+    jobTitle: "Accountant",
   },
   {
     firstName: "James",
@@ -356,10 +378,12 @@ const dummyResumes = [
       {
         companyName: "BusinessWorld",
         position: "Operations Manager",
-        yearStarted: "2014",
-        yearEnd: "Present",
+        yearStarted: "April 2014",
+        yearEnd: "May 2025",
       },
     ],
+    jobCategory: "Administrative",
+    jobTitle: "Operations Manager",
   },
   {
     id: 13,
@@ -382,11 +406,13 @@ const dummyResumes = [
     employments: [
       {
         companyName: "DesignWorks",
-        position: "UX Designer",
-        yearStarted: "2020",
-        yearEnd: "Present",
+        position: "Graphic Designer",
+        yearStarted: "April 2020",
+        yearEnd: "March 2025",
       },
     ],
+    jobCategory: "Technical",
+    jobTitle: "Graphic Designer",
   },
   {
     id: 14,
@@ -416,5 +442,9 @@ const dummyResumes = [
         yearEnd: "2021",
       },
     ],
+    jobCategory: "Professional",
+    jobTitle: "Network Engineer",
   },
 ];
+
+export default dummyData;

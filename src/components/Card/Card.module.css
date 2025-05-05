@@ -4,20 +4,22 @@
   border-radius: 8px;
   color: black;
   text-align: left;
-  padding: 16px 28px 16px 28px;
+
   width: 100%;
-  min-height: 100%;
+  font-size: 16px;
+  box-sizing: border-box;
+  margin-bottom: 10px;
 }
 
 .cardContents {
-  align-items: center;
   display: grid;
-  grid-template-columns: 9% 40% 20% 18% auto;
+  align-items: center;
+  grid-template-columns: 20% 28% 18% 18% 10% 25%;
+  padding: 16px 28px 16px 28px;
   width: 100%;
-  font-size: 1em;
 }
 
-.styledDateContainer {
+/* .styledDateContainer {
   text-align: center;
   width: fit-content;
   margin-top: 6px;
@@ -72,9 +74,26 @@
 
 .LOS {
   background-color: var(--color-button-default);
+} */
+
+.button {
+  display: flex;
+  gap: 20px;
 }
 
-@media (min-width: 1541px) and (max-width: 1650px) {
+.editBtn {
+  background: #007bff;
+  color: white;
+  width: 100px;
+  border: #007bff;
+  gap: 20px;
+  height: 35px;
+}
+
+.saveBtn {
+}
+
+/* @media (min-width: 1541px) and (max-width: 1650px) {
   .eventInfoItem {
     max-width: 290px;
   }
@@ -133,4 +152,4 @@
     text-overflow: ellipsis;
     max-width: 80px;
   }
-}
+} */

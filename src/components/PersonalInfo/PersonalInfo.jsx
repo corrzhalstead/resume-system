@@ -9,6 +9,7 @@ import Dropdown from "../Dropdown";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSquarePlus } from "@fortawesome/free-solid-svg-icons";
 import { faSquareMinus } from "@fortawesome/free-solid-svg-icons";
+import MonthYearPicker from "../MonthYearPicker/MonthYearPicker";
 
 export function PersonalInfo({ personalInfo, onChange, onBlur, onSelect }) {
   const [certificates, setCertificates] = useState([
@@ -40,7 +41,7 @@ export function PersonalInfo({ personalInfo, onChange, onBlur, onSelect }) {
   const handleAddEmployment = () => {
     setEmployments([
       ...employments,
-      { companyName: "", position: "", yearStarted: "", yearEnd: "" },
+      { companyName: "", position: "", jobStarted: "", jobEnd: "" },
     ]);
   };
 
@@ -56,6 +57,42 @@ export function PersonalInfo({ personalInfo, onChange, onBlur, onSelect }) {
     updated[index][field] = value;
     setEmployments(updated);
   };
+
+  const jobTitleOptions = {
+    "Skilled Worker": [
+      "Electrician",
+      "Welder",
+      "Plumber",
+      "Carpenter",
+      "Mechanic",
+    ],
+    Professional: [
+      "Software Engineer",
+      "Accountant",
+      "Lawyer",
+      "Cloud Engineer",
+      "Network Engineer",
+    ],
+    Healthcare: ["Nurse", "Caregiver", "Physical Therapist"],
+    Administrative: [
+      "Office Clerk",
+      "Receptionist",
+      "Data Encoder",
+      "HR Admin",
+      "Operations Manager",
+    ],
+    Technical: [
+      "IT Support",
+      "Technician",
+      "System Admin",
+      "Graphic Designer",
+      "Data Analyst",
+      "Marketing Specialist",
+    ],
+    Other: ["Freelancer", "Tutor", "Uncategorized"],
+  };
+
+  const getJobTitlesByCategory = (category) => jobTitleOptions[category] || [];
 
   return (
     <div className={styles.container}>
@@ -212,12 +249,13 @@ export function PersonalInfo({ personalInfo, onChange, onBlur, onSelect }) {
           value={personalInfo.yearGraduated}
           placeholder="Year graduated"
           onChange={onChange}
+          className={styles.yearGraduated}
         />
       </div>
 
       <div className={styles.certificateContainer}>
         {certificates.map((item, index) => (
-          <div key={index} className={styles.inputRow}>
+          <div key={index} className={styles.inputCertificateRow}>
             <InputItem
               label="Certificate(s) Received"
               name={`certificate${index}`}
@@ -265,6 +303,34 @@ export function PersonalInfo({ personalInfo, onChange, onBlur, onSelect }) {
         ))}
       </div>
 
+      <h3>Position Category</h3>
+      <div className={styles.jobCategoryContainer}>
+        <Dropdown
+          label="Job Category"
+          name="jobCategory"
+          value={personalInfo.jobCategory}
+          onChange={onChange}
+          options={[
+            "Skilled Worker",
+            "Professional",
+            "Healthcare",
+            "Administrative",
+            "Technical",
+            "Other",
+          ]}
+        />
+
+        {personalInfo.jobCategory && (
+          <Dropdown
+            label="Job Title"
+            name="jobTitle"
+            value={personalInfo.jobTitle}
+            onChange={onChange}
+            options={getJobTitlesByCategory(personalInfo.jobCategory)}
+          />
+        )}
+      </div>
+
       <h3>Employment Record </h3>
 
       {/* <div> */}
@@ -295,23 +361,43 @@ export function PersonalInfo({ personalInfo, onChange, onBlur, onSelect }) {
             />
             {/* </div> */}
 
-            <InputItem
-              label="Year Started"
-              name={`yearStarted${index}`}
-              value={item.yearStarted}
-              placeholder="Year started"
+            {/* <InputItem
+              label="Started"
+              name={`jobStarted${index}`}
+              value={item.jobStarted}
+              placeholder=""
               onChange={(e) =>
-                handleEmploymentChange(index, "yearStarted", e.target.value)
+                handleEmploymentChange(index, "jobStarted", e.target.value)
+              }
+            /> */}
+
+            {/* <InputItem
+              label="Ended"
+              name={`jobEnd${index}`}
+              value={item.jobEnd}
+              placeholder=""
+              onChange={(e) =>
+                handleEmploymentChange(index, "jobEnd", e.target.value)
+              }
+            /> */}
+
+            <MonthYearPicker
+              label="Start Date"
+              value={item.startDate}
+              placeholder={"Select"}
+              className={styles.monthYearPicker}
+              onChange={(date) =>
+                handleEmploymentChange(index, "startDate", date)
               }
             />
 
-            <InputItem
-              label="Year Ended"
-              name={`yearEnd${index}`}
-              value={item.yearEnd}
-              placeholder="Year end"
-              onChange={(e) =>
-                handleEmploymentChange(index, "yearEnd", e.target.value)
+            <MonthYearPicker
+              label="End Date"
+              value={item.endDate}
+              placeholder={"Select"}
+              className={styles.monthYearPicker}
+              onChange={(date) =>
+                handleEmploymentChange(index, "endDate", date)
               }
             />
 

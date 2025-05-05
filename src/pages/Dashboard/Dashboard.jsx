@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+import Card from "../../components/Card/Card";
+
 export function Dashboard() {
   const [applicantStats, setApplicantStats] = useState({
     pending: 0,
@@ -9,12 +11,14 @@ export function Dashboard() {
     rejected: 0,
   });
   const [recentActivity, setRecentActivity] = useState([]);
+  const [applicants, setApplicants] = useState([]);
+  const [filteredApplicants, setFilteredApplicants] = useState([]);
+  const [filters, setFilters] = useState({ category: "", experience: "" });
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetchDummyStats(); // Replace with API call later
-    fetchDummyActivity();
-  }, []);
+    applyFilters();
+  }, [filters, applicants]);
 
   const fetchDummyStats = () => {
     setApplicantStats({ pending: 10, interviewing: 5, hired: 3, rejected: 2 });
@@ -26,6 +30,26 @@ export function Dashboard() {
       { id: 2, text: "Jane Smith - Hired!" },
       { id: 3, text: "Mike Brown - Application Rejected" },
     ]);
+  };
+
+  const applyFilters = () => {
+    const filtered = applicants.filter((applicant) => {
+      const matchesCategory = filters.category
+        ? applicant.category
+            .toLowerCase()
+            .includes(filters.category.toLowerCase())
+        : true;
+      const matchesExperience = filters.experience
+        ? applicant.experience >= parseInt(filters.experience)
+        : true;
+      return matchesCategory && matchesExperience;
+    });
+    setFilteredApplicants(filtered);
+  };
+
+  const handleFilterChange = (e) => {
+    const { name, value } = e.target;
+    setFilters((prev) => ({ ...prev, [name]: value }));
   };
 
   return (
@@ -43,6 +67,33 @@ export function Dashboard() {
         <button onClick={() => navigate("/applicants")} style={styles.button}>
           📑 View All Applicants
         </button>
+      </div>
+
+      {/* Filters */}
+      <div style={styles.filters}>
+        <input
+          type="text"
+          name="category"
+          placeholder="Filter by Job Category"
+          value={filters.category}
+          onChange={handleFilterChange}
+          style={styles.input}
+        />
+        <input
+          type="number"
+          name="experience"
+          placeholder="Filter by Years of Experience"
+          value={filters.experience}
+          onChange={handleFilterChange}
+          style={styles.input}
+        />
+      </div>
+
+      {/* Applicant Cards */}
+      <div style={styles.cardContainer}>
+        {filteredApplicants.map((applicant) => (
+          <Card key={applicant.id} applicants={applicant} />
+        ))}
       </div>
 
       {/* Applicant Overview */}

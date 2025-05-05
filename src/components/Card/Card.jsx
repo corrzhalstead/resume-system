@@ -2,19 +2,31 @@ import classNames from "classnames";
 import React from "react";
 import PropTypes from "prop-types";
 import styles from "./Card.module.css";
+import Button from "../Button";
+import formatPhone from "../../utils/formatPhone";
 
 /*
  * A simple component for encapsulating child components neatly in a framed area
  */
-export default function Card({ applicants }) {
+export default function Card({ applicants, onView, onEdit }) {
   return (
     <div className={styles.container}>
       <div className={styles.cardContents}>
         <div>
-          {applicants.lastname}, {applicants.firstname}
+          {applicants.lastName}, {applicants.firstName}
         </div>
         <div>{applicants.email}</div>
+        {/* <div>{formatPhone(applicants.phone)}</div> */}
         <div>{applicants.phone}</div>
+
+        <div>{applicants.jobTitle}</div>
+        {/* <div>{applicants.yearsOfExperience}</div> */}
+
+        <div className={styles.button}>
+          <Button label={"View"} onClick={onView} className={styles.editBtn} />
+
+          <Button label={"Edit"} onClick={onEdit} className={styles.editBtn} />
+        </div>
       </div>
     </div>
   );

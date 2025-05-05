@@ -13,7 +13,9 @@ Default.args = {
     firstname: "John",
     lastname: "Doe",
     email: "johnDoe@gmail.com",
-    phone: "1234567890",
+    phone: "12345678911",
+    jobTitle: "Electrician",
+    yearsOfExperience: "4",
   },
 };
 

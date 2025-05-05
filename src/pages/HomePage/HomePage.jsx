@@ -3,6 +3,8 @@ import NavBar from "../../components/NavBar";
 import styles from "./HomePage.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
+import Card from "../../components/Card/Card";
+import dummyData from "../../store/dummyData";
 
 export function HomePage() {
   const navigate = useNavigate();
@@ -30,6 +32,16 @@ export function HomePage() {
     }
   }, []);
 
+  console.log("DATA", dummyData);
+
+  // function getYearsOfExperience(employments) {
+  //   return employments?.reduce((total, job) => {
+  //     const start = parseInt(job.yearStarted);
+  //     const end = parseInt(job.yearEnd);
+  //     return total + (end - start);
+  //   }, 0);
+  // }
+
   return (
     <div className={styles.container}>
       <div className={styles.topContainer}>
@@ -40,10 +52,10 @@ export function HomePage() {
         </p>
 
         {user ? (
-          <>
-            <h2 className={styles.welcomeUser}>
+          <div>
+            {/* <h2 className={styles.welcomeUser}>
               👋 Welcome, {user?.name || "User"}!
-            </h2>
+            </h2> */}
             <div className={styles.actions}>
               <button
                 onClick={() => navigate("/dashboard")}
@@ -57,18 +69,19 @@ export function HomePage() {
               >
                 <span className={styles.icon}>➕ </span>Add New Applicant
               </button>
-
-              <button
-                // onClick={() => navigate("/edit-resume/:id")}
-                onClick={() => navigate("/edit-resume")}
-                className={styles.button}
-              >
-                <span className={styles.icon}>➕ </span>Edit Applicant Resume
-              </button>
             </div>
-          </>
+
+            {dummyData.map((applicant, index) => (
+              <Card
+                key={index}
+                applicants={applicant}
+                onView={() => console.log("View", applicant.id)}
+                onEdit={() => console.log("Edit", applicant.id)}
+              />
+            ))}
+          </div>
         ) : (
-          <div className={styles.actions}>
+          <div className={styles.signInContainer}>
             <Link to="/signIn" className={styles.button}>
               <span className={styles.icon}>🔑 </span>Sign In to Get Started
             </Link>
