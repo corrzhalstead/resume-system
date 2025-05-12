@@ -3,6 +3,8 @@ import styles from "./FilterMenu.module.css";
 import InputItem from "../InputItem";
 import Dropdown from "../Dropdown";
 import Button from "../Button";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 
 const jobData = {
   Engineering: ["Frontend Developer", "Backend Developer", "Full Stack"],
@@ -48,44 +50,66 @@ export default function FilterMenu({ onFilter }) {
     <div className={styles.container}>
       <div className={styles.filterContainer}>
         <label className={styles.label}>Job Category</label>
-        <select value={category} onChange={(e) => setCategory(e.target.value)}>
-          <option value="">Job Category</option>
-          {Object.keys(jobData).map((cat) => (
-            <option key={cat} value={cat}>
-              {cat}
-            </option>
-          ))}
-        </select>
+        <div className={`${styles.selectWrapper}`}>
+          <select
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+          >
+            <option value="">Job Category</option>
+            {Object.keys(jobData).map((cat) => (
+              <option key={cat} value={cat}>
+                {cat}
+              </option>
+            ))}
+          </select>
+          <FontAwesomeIcon
+            icon={faChevronDown}
+            className={styles.chevronIcon}
+          />
+        </div>
       </div>
 
       <div className={styles.filterContainer}>
         <label className={styles.label}>Job Title</label>
-        <select
-          value={jobTitle}
-          onChange={(e) => setJobTitle(e.target.value)}
-          disabled={!category}
-        >
-          <option value="">Job Title</option>
-          {availableJobTitles.map((title) => (
-            <option key={title} value={title}>
-              {title}
-            </option>
-          ))}
-        </select>
+        <div className={`${styles.selectWrapper}`}>
+          <select
+            value={jobTitle}
+            onChange={(e) => setJobTitle(e.target.value)}
+            disabled={!category}
+          >
+            <option value="">Job Title</option>
+            {availableJobTitles.map((title) => (
+              <option key={title} value={title}>
+                {title}
+              </option>
+            ))}
+          </select>
+          <FontAwesomeIcon
+            icon={faChevronDown}
+            className={styles.chevronIcon}
+          />
+        </div>
       </div>
 
       <div className={styles.filterContainer}>
         <label className={styles.label}>Experience</label>
-        <select
-          value={experience}
-          onChange={(e) => setExperience(e.target.value)}
-        >
-          <option value="">Experience</option>
-          <option value="0-1">0 – 1 years</option>
-          <option value="2-4">2 – 4 years</option>
-          <option value="5-7">5 – 7 years</option>
-          <option value="8+">8+ years</option>
-        </select>
+        <div className={`${styles.selectWrapper}`}>
+          <select
+            value={experience}
+            onChange={(e) => setExperience(e.target.value)}
+          >
+            <option value="">Experience</option>
+            <option value="0-1">0 – 1 years</option>
+            <option value="2-4">2 – 4 years</option>
+            <option value="5-7">5 – 7 years</option>
+            <option value="8+">8+ years</option>
+          </select>
+
+          <FontAwesomeIcon
+            icon={faChevronDown}
+            className={styles.chevronIcon}
+          />
+        </div>
       </div>
 
       <div className={styles.filterContainer}>
@@ -107,17 +131,19 @@ export default function FilterMenu({ onFilter }) {
         />
       </div>
 
-      <Button
-        className={styles.applyButton}
-        label={"🔎 Filter"}
-        onClick={handleFilterChange}
-      />
+      <div className={styles.btnContainer}>
+        <Button
+          className={styles.applyButton}
+          label={"🔎 Filter"}
+          onClick={handleFilterChange}
+        />
 
-      <Button
-        className={styles.resetButton}
-        label={"Reset"}
-        onClick={handleReset}
-      />
+        <Button
+          className={styles.resetButton}
+          label={"Reset"}
+          onClick={handleReset}
+        />
+      </div>
     </div>
   );
 }

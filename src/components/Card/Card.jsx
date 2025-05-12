@@ -12,7 +12,7 @@ export default function Card({ applicants, onView, onEdit }) {
   return (
     <div className={styles.container}>
       <div className={styles.cardContents}>
-        <div>
+        <div className={styles.name}>
           {applicants.lastName}, {applicants.firstName}
         </div>
         <div>{applicants.email}</div>
@@ -20,12 +20,25 @@ export default function Card({ applicants, onView, onEdit }) {
         <div>{applicants.phone}</div>
 
         <div>{applicants.jobTitle}</div>
-        {/* <div>{applicants.yearsOfExperience}</div> */}
+        <div>
+          {/* {applicants.yearsOfExperience} */}
+          years
+        </div>
 
         <div className={styles.button}>
-          <Button label={"View"} onClick={onView} className={styles.editBtn} />
+          <Button
+            label={"View"}
+            img={"👁️"}
+            onClick={onView}
+            className={styles.editBtn}
+          />
 
-          <Button label={"Edit"} onClick={onEdit} className={styles.editBtn} />
+          <Button
+            label={"Edit"}
+            img={"✏️"}
+            onClick={onEdit}
+            className={styles.editBtn}
+          />
         </div>
       </div>
     </div>

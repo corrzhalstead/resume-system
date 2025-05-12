@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import styles from "./NavBar.module.css";
-import logo from "../../assests/HireFlow_logo.png";
+// import logo from "../../assests/HireFlow_logo.png";
+import logo from "../../assests/WhiteTealLogo.png";
+// import logo from "../../assests/BigLogo.png";
+
 import { jwtDecode } from "jwt-decode";
 
 export function NavBar() {
@@ -32,53 +35,59 @@ export function NavBar() {
     navigate("/login");
   };
 
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
-    <nav className={styles.nav}>
-      <div className={styles.leftContainer}>
-        <div className={styles.logo}>
-          <img src={logo} alt="Logo" />
-        </div>
-        <NavLink
-          to="/"
-          className={({ isActive }) =>
-            isActive ? styles.activeLink : styles.link
-          }
-        >
-          Home
-        </NavLink>
-        {token && (
-          <NavLink
-            to="/dashboard"
-            className={({ isActive }) =>
-              isActive ? styles.activeLink : styles.link
-            }
-          >
+    <nav className={styles.navbar}>
+      <div className={styles.container}>
+        <Link to="/" className={styles.logoWrapper}>
+          <img src={logo} alt="AgosRecruit Logo" className={styles.logo} />
+        </Link>
+
+        <div className={styles.desktopMenu}>
+          <Link to="/" className={styles.link}>
+            Home
+          </Link>
+          <Link to="/applicants" className={styles.link}>
+            Applicants
+          </Link>
+          <Link to="/dashboard" className={styles.link}>
             Dashboard
-          </NavLink>
-        )}
+          </Link>
+        </div>
+
+        <button className={styles.hamburger} onClick={() => setIsOpen(!isOpen)}>
+          <span className={styles.bar}></span>
+          <span className={styles.bar}></span>
+          <span className={styles.bar}></span>
+        </button>
       </div>
 
-      <div className={styles.rightContainer}>
-        {token ? (
-          <div className={styles.userSection}>
-            <span className={styles.userName}>👤 {user?.name || "User"}</span>
-            <button onClick={handleLogout} className={styles.logOut}>
-              Logout
-            </button>
-          </div>
-        ) : (
-          <NavLink
-            to="/signIn"
-            className={({ isActive }) =>
-              isActive ? styles.activeLink : styles.link
-            }
+      {isOpen && (
+        <div className={styles.mobileMenu}>
+          <Link
+            to="/"
+            className={styles.mobileLink}
+            onClick={() => setIsOpen(false)}
           >
-            Sign In
-          </NavLink>
-        )}
-      </div>
+            Home
+          </Link>
+          <Link
+            to="/applicants"
+            className={styles.mobileLink}
+            onClick={() => setIsOpen(false)}
+          >
+            Applicants
+          </Link>
+          <Link
+            to="/dashboard"
+            className={styles.mobileLink}
+            onClick={() => setIsOpen(false)}
+          >
+            Dashboard
+          </Link>
+        </div>
+      )}
     </nav>
   );
 }
-
-export default NavBar;

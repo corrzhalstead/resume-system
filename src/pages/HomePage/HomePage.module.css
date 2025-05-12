@@ -19,16 +19,21 @@
 }
 
 .topContainer h1 {
-  font-size: 30px;
-  font-weight: 500;
+  /* font-size: 30px; */
+  font-size: 1.875rem;
+  font-weight: 700;
   margin-bottom: -10px;
 }
 
 .description {
-  font-size: 18px;
+  /* font-size: 18px; */
   /* margin-top: 20px; */
+  /* font-style: italic;
+  font-weight: 300; */
   font-style: italic;
-  font-weight: 300;
+  font-size: 0.95rem;
+  color: #6b7280;
+  margin-top: 0.25rem;
 }
 
 /* .button {
@@ -73,11 +78,32 @@
   color: #fff;
   border: none;
   /* width: 250px; */
+  /* padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 16px; */
+}
+
+.actions button {
   padding: 8px 15px;
   border-radius: 5px;
   cursor: pointer;
   text-decoration: none;
   font-size: 16px;
+}
+
+.dashboardBtn {
+  /* background: #4caf50; */
+  background: #008699;
+  color: #fff;
+  border: none;
+}
+
+.addBtn {
+  background: #008699;
+  color: #fff;
+  border: none;
 }
 
 .icon {
@@ -104,4 +130,25 @@
 
 .noAccountText {
   margin-top: 70px;
+}
+
+.filterContainer {
+  width: 100%;
+  display: flex;
+}
+
+.headerContainer {
+  display: grid;
+  align-items: center;
+  grid-template-columns: 18% 20% 15% 18% auto;
+  padding: 16px 28px 16px 28px;
+  width: 100%;
+  font-weight: 700;
+  font-size: 17px;
+  border: 3px solid #008699;
+  border-radius: 8px;
+  background: #008699;
+  color: #ffffff;
+  text-align: left;
+  margin-bottom: 20px;
 }

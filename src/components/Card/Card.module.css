@@ -14,67 +14,18 @@
 .cardContents {
   display: grid;
   align-items: center;
-  grid-template-columns: 20% 28% 18% 18% 10% 25%;
+  grid-template-columns: 18% 20% 15% 18% 10% auto;
   padding: 16px 28px 16px 28px;
   width: 100%;
 }
 
-/* .styledDateContainer {
-  text-align: center;
-  width: fit-content;
-  margin-top: 6px;
+.cardContents:hover {
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
 }
 
-.dateAndImageContainer {
-  display: grid;
-  grid-template-columns: auto auto;
-  margin-right: 6px;
-}
-
-.bold {
+.name {
   font-weight: bold;
 }
-
-.day {
-  font-weight: bold;
-  color: var(--color-surface-yellow);
-  font-size: 30px;
-}
-
-.eventInfoItem,
-.eventInfoName {
-  margin-top: 4px;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-
-.eventInfoDate {
-  font-weight: lighter;
-  font-style: italic;
-  margin-top: 4px;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-
-.ticketsSoldInfo {
-  display: grid;
-  grid-template-columns: auto auto auto;
-  width: 100px;
-}
-
-.majorEvent {
-  background-color: var(--color-bg-accent);
-}
-
-.localEvent {
-  background-color: var(--color-surface-yellow);
-}
-
-.LOS {
-  background-color: var(--color-button-default);
-} */
 
 .button {
   display: flex;
@@ -82,10 +33,10 @@
 }
 
 .editBtn {
-  background: #007bff;
+  background: #194d7e;
   color: white;
   width: 100px;
-  border: #007bff;
+  border: #194d7e;
   gap: 20px;
   height: 35px;
 }
