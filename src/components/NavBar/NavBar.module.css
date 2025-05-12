@@ -1,62 +1,99 @@
-.nav {
+.navbar {
+  background-color: #194d7e;
+  color: white;
+  padding: 0.5rem 1rem;
+  position: relative;
+}
+
+.container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 20px;
-  background: #007bff;
-  color: #fff;
 }
 
-.leftContainer {
+.logoWrapper {
   display: flex;
   align-items: center;
+}
+
+.logo {
+  /* height: 48px;
+  width: auto; */
+
+  height: 120px;
+  width: auto;
+  margin: -20px 0;
+  padding: 0;
+  display: block;
+}
+
+.desktopMenu {
+  display: flex;
+  gap: 1.5rem;
 }
 
 .link {
   color: white;
   text-decoration: none;
-  margin: 0 15px;
-  font-size: 18px;
+  font-weight: 500;
 }
 
-.activeLink {
-  color: black;
-  background-color: #cdcdcd;
-  padding: 6px 8px;
-  border-radius: 5px;
-  font-weight: bold;
-  border-bottom: none;
-  border-color: transparent;
-  outline: none;
-  text-decoration: none;
-  margin-left: 10px;
+.link:hover {
+  color: #00b8b0;
 }
 
-.button {
-  /* background: red; */
-  background-color: transparent;
-  color: white;
+/* Hamburger */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
   border: none;
-  padding: 8px 12px;
   cursor: pointer;
-  font-size: 16px;
 }
 
-.logo {
+.bar {
+  width: 25px;
+  height: 3px;
+  background-color: white;
+  color: #0a1f33;
+  border-radius: 3px;
+}
+
+/* Mobile menu */
+.mobileMenu {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  color: #0a1f33;
+  background-color: #ffffff;
+  padding: 1rem;
 }
 
-.logo img {
-  height: 45px;
-  width: 45px;
-}
-
-.logOut {
-  background-color: transparent;
+.mobileLink {
   color: white;
-  border: none;
-  margin-left: 50px;
-  cursor: pointer;
-  font-size: 16px;
+  text-decoration: none;
+  padding: 0.5rem 0;
+}
+
+.mobileLink:hover {
+  color: #00b8b0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .desktopMenu {
+    display: none;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .link {
+    color: #0a1f33;
+  }
+
+  .mobileLink {
+    color: #0a1f33;
+  }
 }

@@ -1,18 +1,15 @@
-.grid {
-  /* display: grid;
-  grid-template-columns: 30% 70%; */
+.container {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 10px;
+  width: 100%;
 }
 
-.label {
-  margin-top: auto;
-  margin-bottom: auto;
-  font-weight: 600;
-}
+.select {
+  flex: 1;
+  min-width: 310px;
+  max-width: 320px;
 
-.input {
   border-radius: 8px;
   border: 2px solid #c5cfd1;
   background-color: #fff;
@@ -20,14 +17,88 @@
   padding: 5px;
   padding-left: 10px;
   font-size: 15px;
-  height: 30px !important;
+  height: 40px !important;
+
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  font-size: 16px;
+  padding: 0.5rem 2rem 0.5rem 0.5rem;
+  width: 100%;
 }
 
-.input:focus {
+.selectWrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.label {
+  margin-top: auto;
+  margin-bottom: auto;
+  font-weight: 600;
+  margin-right: 20px;
+  /* min-width: 110px; */
+}
+
+.options {
+  margin: 5px 0;
+}
+
+.chevronIcon {
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  font-size: 16px;
+  color: #555;
+}
+
+.select:focus {
   outline: none;
   border: 2px solid #007bff;
 }
 
-.input::placeholder {
+/* .input::placeholder {
   color: #8b9394;
+} */
+
+@media (min-width: 1485.98px) and (max-width: 1547.98px) {
+  .select {
+    min-width: 310px;
+    max-width: 320px;
+  }
+}
+
+@media (min-width: 1444.98px) and (max-width: 1485px) {
+  .select {
+    min-width: 280px;
+    max-width: 300px;
+  }
+}
+
+@media (min-width: 1349.98px) and (max-width: 1444px) {
+  .select {
+    min-width: 250px;
+    max-width: 250px;
+  }
+}
+
+@media (min-width: 1280.98px) and (max-width: 1349px) {
+  .select {
+    min-width: 200px;
+    max-width: 200px;
+  }
+}
+
+@media (max-width: 1280px) {
+  .select {
+    min-width: 250px;
+  }
+}
+
+@media (max-width: 1074px) {
+  .label {
+    min-width: 110px;
+  }
 }

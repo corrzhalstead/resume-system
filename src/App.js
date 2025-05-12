@@ -30,6 +30,11 @@ function App() {
             element={<ProtectedRoute element={<Dashboard />} />}
           />
           <Route path="/create" element={<CreateResumePage />} />
+          <Route
+            // path="/edit-resume/:id"
+            path="/edit-resume"
+            element={<CreateResumePage isEdit={true} />}
+          />
           <Route path="/signIn" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
         </Routes>

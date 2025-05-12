@@ -1,5 +1,5 @@
 import React from "react";
-import Card from "./index";
+import Card from "./Card";
 export default {
   title: "components/Card",
   component: Card,
@@ -9,7 +9,14 @@ const Template = (args) => <Card {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
-  children: "Quite a nice card.",
+  applicants: {
+    firstname: "John",
+    lastname: "Doe",
+    email: "johnDoe@gmail.com",
+    phone: "12345678911",
+    jobTitle: "Electrician",
+    yearsOfExperience: "4",
+  },
 };
 
 export const WithChildren = Template.bind({});
