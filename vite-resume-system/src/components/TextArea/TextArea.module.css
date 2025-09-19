@@ -1,0 +1,41 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  color: black;
+  height: 100%;
+}
+
+.textArea {
+  width: 100%;
+  font-size: 1em;
+  height: 100%;
+  resize: none;
+  padding-top: 0.812em;
+  padding-right: 0.8em;
+  padding-bottom: 0.812em;
+  padding-left: 0.8em;
+  border-radius: 0.5em;
+  background: #fbfcfd 0% 0% no-repeat padding-box;
+  border: 1px solid #afafaf;
+
+  scrollbar-width: thin;
+  scrollbar-color: #888 var(--color-card-bg);
+}
+
+.textArea::-webkit-scrollbar-track {
+  background-color: var(--color-card-bg);
+}
+.textArea::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 100px;
+}
+
+.label {
+  font-weight: bold;
+  text-align: left;
+  margin-bottom: 0.8em;
+}
+
+.container textarea[type="text"]:focus {
+  outline: none;
+}
