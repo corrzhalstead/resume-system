@@ -2,14 +2,14 @@ import React, { useState, useEffect } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import styles from "./NavBar.module.css";
 // import logo from "../../assests/HireFlow_logo.png";
-import logo from "../../assests/WhiteTealLogo.png";
+import logo from "../../assets/WhiteTealLogo.png";
 // import logo from "../../assests/BigLogo.png";
 
 import { jwtDecode } from "jwt-decode";
 
 export function NavBar() {
   const navigate = useNavigate();
-  const token = localStorage.getItem("token");
+  // const token = localStorage.getItem("token");
   const [user, setUser] = useState(null);
 
   useEffect(() => {
@@ -29,11 +29,11 @@ export function NavBar() {
     }
   }, []);
 
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    setUser(null);
-    navigate("/login");
-  };
+  // const handleLogout = () => {
+  //   localStorage.removeItem("token");
+  //   setUser(null);
+  //   navigate("/login");
+  // };
 
   const [isOpen, setIsOpen] = useState(false);
 

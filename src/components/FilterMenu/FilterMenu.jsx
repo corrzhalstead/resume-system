@@ -1,33 +1,76 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import styles from "./FilterMenu.module.css";
-import InputItem from "../InputItem";
-import Dropdown from "../Dropdown";
 import Button from "../Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
-
-const jobData = {
-  Engineering: ["Frontend Developer", "Backend Developer", "Full Stack"],
-  Design: ["UI Designer", "UX Designer", "Graphic Designer"],
-  Marketing: ["Content Strategist", "SEO Specialist", "Digital Marketer"],
-  HR: ["Recruiter", "HR Generalist", "Talent Acquisition"],
-};
+import dummyData from "../../store/dummyData";
 
 export default function FilterMenu({ onFilter }) {
   const [category, setCategory] = useState("");
   const [jobTitle, setJobTitle] = useState("");
   const [experience, setExperience] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
-  const [availableJobTitles, setAvailableJobTitles] = useState([]);
+
+  const { jobData, categoryOptions, allJobTitles } = useMemo(() => {
+    const categoryToTitles = new Map();
+    const titlesSet = new Set();
+
+    dummyData.forEach((applicant) => {
+      const categoryKey = applicant.jobCategory?.trim();
+      const titleKey = applicant.jobTitle?.trim();
+
+      if (categoryKey) {
+        if (!categoryToTitles.has(categoryKey)) {
+          categoryToTitles.set(categoryKey, new Set());
+        }
+
+        if (titleKey) {
+          categoryToTitles.get(categoryKey).add(titleKey);
+        }
+      }
+
+      if (titleKey) {
+        titlesSet.add(titleKey);
+      }
+    });
+
+    const mappedJobData = {};
+    categoryToTitles.forEach((titlesSetValue, categoryKey) => {
+      mappedJobData[categoryKey] = Array.from(titlesSetValue).sort((a, b) =>
+        a.localeCompare(b),
+      );
+    });
+
+    return {
+      jobData: mappedJobData,
+      categoryOptions: Object.keys(mappedJobData).sort((a, b) =>
+        a.localeCompare(b),
+      ),
+      allJobTitles: Array.from(titlesSet).sort((a, b) => a.localeCompare(b)),
+    };
+  }, []);
+
+  const [availableJobTitles, setAvailableJobTitles] = useState(allJobTitles);
+  const isExperienceDisabled = !category && !jobTitle;
 
   useEffect(() => {
     if (category) {
-      setAvailableJobTitles(jobData[category] || []);
-      setJobTitle("");
+      const titlesForCategory = jobData[category] ?? [];
+      setAvailableJobTitles(titlesForCategory);
+
+      if (jobTitle && !titlesForCategory.includes(jobTitle)) {
+        setJobTitle("");
+      }
     } else {
-      setAvailableJobTitles([]);
+      setAvailableJobTitles(allJobTitles);
     }
-  }, [category]);
+  }, [allJobTitles, category, jobData, jobTitle]);
+
+  useEffect(() => {
+    if (isExperienceDisabled && experience) {
+      setExperience("");
+    }
+  }, [experience, isExperienceDisabled]);
 
   const handleFilterChange = () => {
     onFilter({
@@ -56,7 +99,7 @@ export default function FilterMenu({ onFilter }) {
             onChange={(e) => setCategory(e.target.value)}
           >
             <option value="">Job Category</option>
-            {Object.keys(jobData).map((cat) => (
+            {categoryOptions.map((cat) => (
               <option key={cat} value={cat}>
                 {cat}
               </option>
@@ -75,7 +118,6 @@ export default function FilterMenu({ onFilter }) {
           <select
             value={jobTitle}
             onChange={(e) => setJobTitle(e.target.value)}
-            disabled={!category}
           >
             <option value="">Job Title</option>
             {availableJobTitles.map((title) => (
@@ -97,11 +139,12 @@ export default function FilterMenu({ onFilter }) {
           <select
             value={experience}
             onChange={(e) => setExperience(e.target.value)}
+            disabled={isExperienceDisabled}
           >
             <option value="">Experience</option>
-            <option value="0-1">0 – 1 years</option>
-            <option value="2-4">2 – 4 years</option>
-            <option value="5-7">5 – 7 years</option>
+            <option value="0-1">0 - 1 years</option>
+            <option value="2-4">2 - 4 years</option>
+            <option value="5-7">5 - 7 years</option>
             <option value="8+">8+ years</option>
           </select>
 
@@ -134,7 +177,7 @@ export default function FilterMenu({ onFilter }) {
       <div className={styles.btnContainer}>
         <Button
           className={styles.applyButton}
-          label={"🔎 Filter"}
+          label={"Filter"}
           onClick={handleFilterChange}
         />
 
