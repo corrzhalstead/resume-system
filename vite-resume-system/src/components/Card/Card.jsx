@@ -1,9 +1,9 @@
-import classNames from "classnames";
+// import classNames from "classnames";
 import React from "react";
 import PropTypes from "prop-types";
 import styles from "./Card.module.css";
 import Button from "../Button";
-import formatPhone from "../../utils/formatPhone";
+// import formatPhone from "../../utils/formatPhone";
 
 /*
  * A simple component for encapsulating child components neatly in a framed area
@@ -21,8 +21,8 @@ export default function Card({ applicants, onView, onEdit }) {
 
         <div>{applicants.jobTitle}</div>
         <div>
-          {/* {applicants.yearsOfExperience} */}
-          years
+          {applicants.yearsOfExperience}
+          {/* years */}
         </div>
 
         <div className={styles.button}>

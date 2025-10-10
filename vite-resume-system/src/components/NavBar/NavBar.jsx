@@ -9,7 +9,7 @@ import { jwtDecode } from "jwt-decode";
 
 export function NavBar() {
   const navigate = useNavigate();
-  const token = localStorage.getItem("token");
+  // const token = localStorage.getItem("token");
   const [user, setUser] = useState(null);
 
   useEffect(() => {

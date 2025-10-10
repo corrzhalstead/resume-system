@@ -51,6 +51,7 @@
   background: #007bff;
   color: white;
   width: 150px;
+  height: 35px;
   border: #007bff;
 }
 
@@ -58,6 +59,7 @@
   background: #cdcdcd !important;
   color: #000000 !important;
   width: 150px;
+  height: 35px;
   border: #cdcdcd;
 }
 
