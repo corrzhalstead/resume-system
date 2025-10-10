@@ -140,7 +140,9 @@
 .headerContainer {
   display: grid;
   align-items: center;
-  grid-template-columns: 18% 20% 15% 18% auto;
+  /* grid-template-columns: 18% 20% 15% 18% auto; */
+  grid-template-columns: 18% 20% 15% 14% auto;
+
   padding: 16px 28px 16px 28px;
   width: 100%;
   font-weight: 700;
