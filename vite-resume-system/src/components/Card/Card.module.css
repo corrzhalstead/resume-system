@@ -1,0 +1,106 @@
+.container {
+  /* background-color: inherit; */
+  border: 1px solid #cdcdcdcd;
+  border-radius: 8px;
+  color: black;
+  text-align: left;
+
+  width: 100%;
+  font-size: 16px;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+}
+
+.cardContents {
+  display: grid;
+  align-items: center;
+  grid-template-columns: 18% 20% 15% 18% 12% auto;
+  padding: 16px 28px 16px 28px;
+  width: 100%;
+}
+
+.cardContents:hover {
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+}
+
+.name {
+  font-weight: bold;
+}
+
+.button {
+  display: flex;
+  gap: 20px;
+}
+
+.editBtn {
+  background: #194d7e;
+  color: white;
+  width: 100px;
+  border: #194d7e;
+  gap: 20px;
+  height: 35px;
+}
+
+.saveBtn {
+}
+
+/* @media (min-width: 1541px) and (max-width: 1650px) {
+  .eventInfoItem {
+    max-width: 290px;
+  }
+}
+
+@media (min-width: 1430px) and (max-width: 1540px) {
+  .eventCardContents {
+    grid-template-columns: 11% 35% 22% 20% auto;
+  }
+}
+
+@media (min-width: 1340px) and (max-width: 1429px) {
+  .eventInfoDate {
+    max-width: 180px;
+  }
+
+  .eventCardContents {
+    grid-template-columns: 11% 35% 20% 20% auto;
+  }
+}
+
+@media (min-width: 1280px) and (max-width: 1339.98px) {
+  .eventInfoDate {
+    max-width: 200px;
+  }
+
+  .eventCardContents {
+    grid-template-columns: 12% 35% 23% 17% auto;
+  }
+}
+
+@media (min-width: 1201px) and (max-width: 1279px) {
+  .eventCardContents {
+    grid-template-columns: 13% 35% 23% 15% auto;
+    font-size: 15px;
+  }
+
+  .status {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 80px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .eventCardContents {
+    grid-template-columns: 14% 28% 25% 16% auto;
+
+    font-size: 14px;
+  }
+
+  .status {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 80px;
+  }
+} */
