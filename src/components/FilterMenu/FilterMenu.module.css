@@ -108,3 +108,90 @@
   background-color: #d32f2f;
   color: white;
 }
+
+/* Responsive design to match card width */
+@media (max-width: 1400px) {
+  .container {
+    gap: 12px;
+    padding-top: 15px;
+    padding-bottom: 30px;
+  }
+
+  .filterContainer select {
+    min-width: 180px;
+    max-width: 220px;
+    font-size: 14px;
+    height: 35px !important;
+    padding: 0.4rem 1.5rem 0.4rem 0.4rem;
+  }
+
+  .filterContainer input {
+    font-size: 14px;
+    height: 35px !important;
+    min-width: 250px;
+    max-width: 280px;
+    padding: 4px 8px;
+  }
+
+  .applyButton,
+  .resetButton {
+    height: 35px;
+    width: 85px;
+    font-size: 14px;
+    padding: 0.3rem 0.6rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  .container {
+    gap: 10px;
+    padding-top: 12px;
+    padding-bottom: 25px;
+    flex-wrap: wrap;
+  }
+
+  .filterContainer select {
+    min-width: 150px;
+    max-width: 180px;
+    font-size: 13px;
+    height: 32px !important;
+  }
+
+  .filterContainer input {
+    font-size: 13px;
+    height: 32px !important;
+    min-width: 200px;
+    max-width: 240px;
+  }
+
+  .applyButton,
+  .resetButton {
+    height: 32px;
+    width: 75px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 15px;
+  }
+
+  .filterContainer {
+    width: 100%;
+  }
+
+  .filterContainer select,
+  .filterContainer input {
+    width: 100%;
+    min-width: auto;
+    max-width: none;
+  }
+
+  .btnContainer {
+    justify-content: center;
+    margin-top: 15px;
+  }
+}

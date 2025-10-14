@@ -18,8 +18,33 @@ export default function Pagination({
   // Keep the signature backward compatible while limit controls are out of scope
   void onLimitChange;
 
-  const pageNumbers = Array.from({ length: totalPages }, (_, index) => index + 1);
+  // Generate a smart pagination with limited visible pages
+  const getVisiblePages = () => {
+    const maxVisiblePages = 5; // Show max 5 page numbers at a time
+    const halfVisible = Math.floor(maxVisiblePages / 2);
 
+    if (totalPages <= maxVisiblePages) {
+      // If total pages is less than max visible, show all pages
+      return Array.from({ length: totalPages }, (_, index) => index + 1);
+    }
+
+    let startPage = Math.max(1, currentPage - halfVisible);
+    let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+
+    // Adjust if we're near the end
+    if (endPage - startPage < maxVisiblePages - 1) {
+      startPage = Math.max(1, endPage - maxVisiblePages + 1);
+    }
+
+    const pages = [];
+    for (let i = startPage; i <= endPage; i++) {
+      pages.push(i);
+    }
+
+    return pages;
+  };
+
+  const visiblePages = getVisiblePages();
   const prevDisabled = disabled || currentPage <= 1;
   const nextDisabled = disabled || disableNext || currentPage >= totalPages;
 
@@ -40,7 +65,9 @@ export default function Pagination({
     <nav className={styles.nav} aria-label="Pagination">
       <ul className={styles.pagination}>
         <li
-          className={`${styles.pageItem} ${prevDisabled ? styles.disabled : ""}`}
+          className={`${styles.pageItem} ${
+            prevDisabled ? styles.disabled : ""
+          }`}
         >
           <button
             type="button"
@@ -53,15 +80,15 @@ export default function Pagination({
           </button>
         </li>
 
-        {pageNumbers.map((pageNumber) => {
+        {visiblePages.map((pageNumber) => {
           const isActive = pageNumber === currentPage;
 
           return (
             <li
               key={pageNumber}
-              className={`${styles.pageItem} ${
-                isActive ? styles.active : ""
-              } ${disabled ? styles.disabled : ""}`}
+              className={`${styles.pageItem} ${isActive ? styles.active : ""} ${
+                disabled ? styles.disabled : ""
+              }`}
             >
               <button
                 type="button"
@@ -71,16 +98,16 @@ export default function Pagination({
                 disabled={disabled || isActive}
               >
                 {pageNumber}
-                {isActive && (
-                  <span className={styles.srOnly}>(current)</span>
-                )}
+                {isActive && <span className={styles.srOnly}>(current)</span>}
               </button>
             </li>
           );
         })}
 
         <li
-          className={`${styles.pageItem} ${nextDisabled ? styles.disabled : ""}`}
+          className={`${styles.pageItem} ${
+            nextDisabled ? styles.disabled : ""
+          }`}
         >
           <button
             type="button"

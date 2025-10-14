@@ -1,21 +1,27 @@
 .container {
-  width: 100%;
+  /* width: 100%;
+  max-width: 1400px; 
   height: 100vh;
+  margin: 0 auto;
   padding: 20px 50px;
-  /* margin: 30px; */
-  /* background-color: white !important; */
-  /* font-family: "Open Sans", sans-serif; */
-  /* margin: 0 auto; */
+  display: flex;
+  flex-direction: column; */
+
+  width: 100%;
+  max-width: 1400px;
+  height: calc(100vh - 120px);
+  margin: 0 auto;
+  padding: 20px 50px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 120px;
 }
 
 .topContainer {
-  /* display: flex;
+  width: 100%;
+  height: 100%;
+  display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  text-align: center;
-  margin: 100px auto; */
 }
 
 .topContainer h1 {
@@ -56,20 +62,27 @@
   margin-bottom: 20px;
 }
 
+.welcomeContainer {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 .signInContainer {
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 15px;
-
-  margin-bottom: 20px;
+  margin-top: 50px;
+  /* margin-bottom: 20px; */
 
   /* display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: center; */
 
-  text-align: center;
+  /* text-align: center;
   margin: 100px auto; */
 }
 
@@ -117,7 +130,8 @@
 
 .buttonSignUp {
   width: 250px;
-  background: #28a745;
+  /* background: #28a745; */
+  background: #008699;
   color: #fff;
   border: none;
   width: 250px !important;
@@ -126,10 +140,14 @@
   cursor: pointer;
   text-decoration: none;
   font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .noAccountText {
-  margin-top: 70px;
+  margin-top: 40px;
+  margin-bottom: 0;
 }
 
 .filterContainer {
@@ -137,12 +155,18 @@
   display: flex;
 }
 
+.innerContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-height: 0;
+}
+
 .headerContainer {
   display: grid;
   align-items: center;
-  /* grid-template-columns: 18% 20% 15% 18% auto; */
-  grid-template-columns: 18% 20% 15% 14% auto;
-
+  grid-template-columns: 18% 20% 15% 14% 12% auto;
   padding: 16px 28px 16px 28px;
   width: 100%;
   font-weight: 700;
@@ -152,5 +176,133 @@
   background: #008699;
   color: #ffffff;
   text-align: left;
-  margin-bottom: 20px;
+  margin-bottom: 0;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+/* Scrollable card container */
+.cardContainer {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-top: 20px;
+  min-height: 0;
+}
+
+/* Custom scrollbar for card container */
+.cardContainer::-webkit-scrollbar {
+  width: 8px;
+}
+
+.cardContainer::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.cardContainer::-webkit-scrollbar-thumb {
+  background: #008699;
+  border-radius: 4px;
+}
+
+.cardContainer::-webkit-scrollbar-thumb:hover {
+  background: #006d7a;
+}
+
+/* Add styles for card items */
+.cardItem {
+  width: 100%;
+}
+
+.striped {
+  background-color: #f9f9f9;
+}
+
+/* Fixed layout with horizontal scroll - maintains 1400px min-width */
+/* Content maintains optimal layout and scrolls horizontally when needed */
+
+/* Optional: Add subtle styling for better UX */
+/* .container::-webkit-scrollbar {
+  height: 8px;
+}
+
+.container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.container::-webkit-scrollbar-thumb {
+  background: #008699;
+  border-radius: 4px;
+}
+
+.container::-webkit-scrollbar-thumb:hover {
+  background: #006d7a;
+} */
+
+/* Ensure all content respects the min-width */
+.headerContainer,
+.cardItem,
+.filterContainer {
+  min-width: fit-content;
+}
+
+/* Keep original grid layout for optimal desktop experience */
+.headerContainer {
+  grid-template-columns: 18% 20% 15% 14% 12% auto;
+}
+
+/* Responsive design to match NavBar */
+@media (max-width: 1540px) {
+  .container {
+    max-width: 100%;
+  }
+
+  .innerContent {
+    width: 100%;
+    overflow: auto;
+  }
+
+  .headerContainer {
+    grid-template-columns: 20% 20% 15% 14% 12% auto;
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 1280px) {
+  .container {
+    padding: 20px 1.5rem;
+  }
+
+  .headerContainer {
+    grid-template-columns: 20% 20% 15% 14% 12% auto;
+    font-size: 14px;
+  }
+
+  .cardContainer {
+    width: 100%;
+    min-width: 1000px;
+    overflow-y: scroll;
+    overflow-x: auto;
+    /* background-color: aqua; */
+  }
+
+  .innerContent {
+    width: 100%;
+    min-width: 1000px;
+    overflow: auto;
+    background-color: lightgreen;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 15px 1rem;
+  }
+
+  .headerContainer {
+    font-size: 13px;
+    padding: 10px 16px;
+  }
 }

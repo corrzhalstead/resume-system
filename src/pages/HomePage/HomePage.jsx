@@ -4,7 +4,9 @@ import styles from "./HomePage.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import Card from "../../components/Card/Card";
-import dummyData from "../../store/dummyData";
+// import dummyData from "../../store/dummyData";
+import fakeResumes from "../../store/fakeResumes";
+
 import FilterMenu from "../../components/FilterMenu/FilterMenu";
 import Pagination from "../../components/Pagination/Pagination";
 
@@ -41,7 +43,8 @@ export function HomePage() {
     }
   }, []);
 
-  console.log("DATA", dummyData);
+  // console.log("DATA", dummyData);
+  console.log("DATA", fakeResumes);
 
   const handleFilterChange = useCallback((nextFilters) => {
     const sanitizedFilters = { ...nextFilters };
@@ -64,7 +67,9 @@ export function HomePage() {
         !filters.jobTitle || applicant.jobTitle === filters.jobTitle;
       const matchesSearch =
         !term ||
-        `${applicant.firstName} ${applicant.lastName} ${applicant.email ?? ""} ${applicant.jobTitle ?? ""}`
+        `${applicant.firstName} ${applicant.lastName} ${
+          applicant.email ?? ""
+        } ${applicant.jobTitle ?? ""}`
           .toLowerCase()
           .includes(term);
 
@@ -75,22 +80,22 @@ export function HomePage() {
       );
 
       return (
-        matchesCategory &&
-        matchesJobTitle &&
-        matchesSearch &&
-        matchesExperience
+        matchesCategory && matchesJobTitle && matchesSearch && matchesExperience
       );
     },
     [filters]
   );
 
   const filteredApplicants = useMemo(
-    () => dummyData.filter((applicant) => matchesFilters(applicant)),
+    () => fakeResumes.filter((applicant) => matchesFilters(applicant)),
     [matchesFilters]
   );
 
   const PAGE_SIZE = 10;
-  const totalPages = Math.max(1, Math.ceil(filteredApplicants.length / PAGE_SIZE));
+  const totalPages = Math.max(
+    1,
+    Math.ceil(filteredApplicants.length / PAGE_SIZE)
+  );
   const startIndex = (currentPage - 1) * PAGE_SIZE;
   const paginatedApplicants = filteredApplicants.slice(
     startIndex,
@@ -182,10 +187,11 @@ export function HomePage() {
   }
 
   return (
-    <div className={styles.container}>
-      <div className={styles.topContainer}>
-        {user ? (
-          <div>
+    <>
+      <div className={styles.container}>
+        {/* <div className={styles.topContainer}> */}
+        {user && (
+          <div className={styles.topContainer}>
             <h1>Find and Manage Applicants</h1>
             <p className={styles.description}>
               Search applicants by name, role, or status.
@@ -210,64 +216,70 @@ export function HomePage() {
               <FilterMenu onFilter={handleFilterChange} />
             </div>
 
-            <div>
-              <Pagination
-                page={currentPage}
-                lastPage={totalPages}
-                onPageChange={setCurrentPage}
-              />
-            </div>
+            <div className={styles.innerContent}>
+              <div>
+                <Pagination
+                  page={currentPage}
+                  lastPage={totalPages}
+                  onPageChange={setCurrentPage}
+                />
+              </div>
 
-            <div className={styles.headerContainer}>
-              <div className={styles.name}>Name</div>
-              <div>Email</div>
-              <div>Contact Number</div>
-              <div>Position</div>
-              <div>Years Of Experience</div>
-            </div>
+              <div className={styles.headerContainer}>
+                <div className={styles.name}>Name</div>
+                <div>Email</div>
+                <div>Contact Number</div>
+                <div>Position</div>
+                <div>Years Of Experience</div>
+              </div>
 
-            {paginatedApplicants.map((applicant, index) => {
-              const yearsOfExperience = getYearsOfExperience(
-                applicant.employments
-              );
+              <div className={styles.cardContainer}>
+                {paginatedApplicants.map((applicant, index) => {
+                  const yearsOfExperience = getYearsOfExperience(
+                    applicant.employments
+                  );
 
-              return (
-                <div
-                  key={applicant.id ?? index}
-                  className={`${styles.cardItem} ${
-                    index % 2 === 0 ? styles.striped : ""
-                  }`}
-                >
-                  <Card
-                    applicants={{ ...applicant, yearsOfExperience }}
-                    onView={() => console.log("View", applicant.id)}
-                    onEdit={() => console.log("Edit", applicant.id)}
-                  />
-                </div>
-              );
-            })}
-          </div>
-        ) : (
-          <div>
-            <h1>Welcome to Agos Recruit</h1>
-            <p className={styles.description}>
-              {/* Track applications, schedule interviews, and manage your hiring
-            process. */}
-              Manage applications, monitor progress, and prepare for deployment.
-            </p>
-
-            <div className={styles.signInContainer}>
-              <Link to="/signIn" className={styles.button}>
-                <span className={styles.icon}>🔑 </span>Sign In to Get Started
-              </Link>
-              <p className={styles.noAccountText}>No account yet?</p>
-              <Link to="/signup" className={styles.buttonSignUp}>
-                <span className={styles.icon}>📝 </span>Sign Up
-              </Link>
+                  return (
+                    <div
+                      key={applicant.id ?? index}
+                      className={`${styles.cardItem} ${
+                        index % 2 === 0 ? styles.striped : ""
+                      }`}
+                    >
+                      <Card
+                        applicants={{ ...applicant, yearsOfExperience }}
+                        onView={() => console.log("View", applicant.id)}
+                        onEdit={() => console.log("Edit", applicant.id)}
+                      />
+                    </div>
+                  );
+                })}
+              </div>
             </div>
           </div>
         )}
+
+        <div className={styles.welcomeContainer}>
+          <h1>Welcome to Agos Recruit</h1>
+          <p className={styles.description}>
+            {/* Track applications, schedule interviews, and manage your hiring
+            process. */}
+            Manage applications, monitor progress, and prepare for deployment.
+          </p>
+
+          <div className={styles.signInContainer}>
+            <Link to="/signIn" className={styles.buttonSignUp}>
+              <span className={styles.icon}>🔑 </span>Sign In to Get Started
+            </Link>
+            <p className={styles.noAccountText}>No account yet?</p>
+            <Link to="/signup" className={styles.buttonSignUp}>
+              <span className={styles.icon}>📝 </span>Sign Up
+            </Link>
+          </div>
+        </div>
+
+        {/* </div> */}
       </div>
-    </div>
+    </>
   );
 }

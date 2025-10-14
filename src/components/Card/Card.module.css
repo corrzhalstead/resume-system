@@ -41,66 +41,75 @@
   height: 35px;
 }
 
-.saveBtn {
-}
-
-/* @media (min-width: 1541px) and (max-width: 1650px) {
-  .eventInfoItem {
-    max-width: 290px;
-  }
-}
-
-@media (min-width: 1430px) and (max-width: 1540px) {
-  .eventCardContents {
-    grid-template-columns: 11% 35% 22% 20% auto;
-  }
-}
-
-@media (min-width: 1340px) and (max-width: 1429px) {
-  .eventInfoDate {
-    max-width: 180px;
-  }
-
-  .eventCardContents {
-    grid-template-columns: 11% 35% 20% 20% auto;
-  }
-}
-
-@media (min-width: 1280px) and (max-width: 1339.98px) {
-  .eventInfoDate {
+@media (max-width: 1540px) {
+  .cardContents > div:nth-child(2) {
+    /* Email column - add ellipsis */
+    /* overflow: hidden; */
+    white-space: nowrap;
+    text-overflow: ellipsis;
     max-width: 200px;
   }
 
-  .eventCardContents {
-    grid-template-columns: 12% 35% 23% 17% auto;
-  }
-}
-
-@media (min-width: 1201px) and (max-width: 1279px) {
-  .eventCardContents {
-    grid-template-columns: 13% 35% 23% 15% auto;
-    font-size: 15px;
-  }
-
-  .status {
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    max-width: 80px;
-  }
-}
-
-@media (max-width: 1200px) {
-  .eventCardContents {
-    grid-template-columns: 14% 28% 25% 16% auto;
-
+  .cardContents {
+    grid-template-columns: 20% 18% 15% 18% 8% auto;
     font-size: 14px;
   }
 
-  .status {
+  .cardContents > div:nth-child(2) {
+    /* Email column - add ellipsis */
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-    max-width: 80px;
+    max-width: 150px;
+  }
+}
+
+/* Responsive design for cards */
+/* @media (max-width: 1280px) {
+} */
+
+/* @media (max-width: 1024px) {
+  .cardContents {
+    grid-template-columns: 22% 28% 15% 22% 8% auto;
+    font-size: 13px;
+    padding: 12px 20px;
+  }
+
+  .cardContents > div:nth-child(2) {
+    max-width: 120px;
+  }
+
+  .button {
+    gap: 10px;
+  }
+
+  .editBtn {
+    width: 80px;
+    height: 30px;
+    font-size: 12px;
+  }
+} */
+
+/* @media (max-width: 768px) {
+  .container {
+    overflow-x: auto;
+    min-width: 600px;
+  }
+
+  .cardContents {
+    grid-template-columns: 18% 25% 15% 20% 10% auto;
+    font-size: 12px;
+    padding: 10px 16px;
+    min-width: 600px;
+  }
+
+  .cardContents > div:nth-child(2) {
+    max-width: 100px;
+  }
+
+  .editBtn {
+    width: 70px;
+    height: 28px;
+    font-size: 11px;
   }
 } */

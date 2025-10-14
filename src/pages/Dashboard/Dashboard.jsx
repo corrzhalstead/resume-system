@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import Card from "../../components/Card/Card";
+import fakeResumes from "../../store/fakeResumes";
 
 export function Dashboard() {
   const [applicantStats, setApplicantStats] = useState({
@@ -17,40 +18,59 @@ export function Dashboard() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    // Initialize applicants with fake resume data
+    const mappedApplicants = fakeResumes.map((resume) => ({
+      id: resume.id,
+      firstName: resume.firstName,
+      lastName: resume.lastName,
+      name: `${resume.firstName} ${resume.lastName}`,
+      category: resume.jobCategory,
+      experience: Math.floor(Math.random() * 10) + 1, // Random experience years
+      yearsOfExperience: Math.floor(Math.random() * 10) + 1, // For Card component
+      position: resume.jobTitle,
+      jobTitle: resume.jobTitle,
+      email: resume.email,
+      phone: resume.phone,
+      ...resume,
+    }));
+    setApplicants(mappedApplicants);
+  }, []);
+
+  useEffect(() => {
+    const applyFilters = () => {
+      const filtered = applicants.filter((applicant) => {
+        const matchesCategory = filters.category
+          ? applicant.category
+              .toLowerCase()
+              .includes(filters.category.toLowerCase())
+          : true;
+        const matchesExperience = filters.experience
+          ? applicant.experience >= parseInt(filters.experience)
+          : true;
+        return matchesCategory && matchesExperience;
+      });
+      setFilteredApplicants(filtered);
+    };
+
     applyFilters();
   }, [filters, applicants]);
 
-  const fetchDummyStats = () => {
+  useEffect(() => {
+    // Initialize dummy stats and activity
     setApplicantStats({ pending: 10, interviewing: 5, hired: 3, rejected: 2 });
-  };
-
-  const fetchDummyActivity = () => {
     setRecentActivity([
       { id: 1, text: "John Doe - Moved to Interviewing" },
       { id: 2, text: "Jane Smith - Hired!" },
       { id: 3, text: "Mike Brown - Application Rejected" },
     ]);
-  };
-
-  const applyFilters = () => {
-    const filtered = applicants.filter((applicant) => {
-      const matchesCategory = filters.category
-        ? applicant.category
-            .toLowerCase()
-            .includes(filters.category.toLowerCase())
-        : true;
-      const matchesExperience = filters.experience
-        ? applicant.experience >= parseInt(filters.experience)
-        : true;
-      return matchesCategory && matchesExperience;
-    });
-    setFilteredApplicants(filtered);
-  };
+  }, []);
 
   const handleFilterChange = (e) => {
     const { name, value } = e.target;
     setFilters((prev) => ({ ...prev, [name]: value }));
   };
+
+  console.log("Fake Resumes:", fakeResumes);
 
   return (
     <div style={styles.container}>

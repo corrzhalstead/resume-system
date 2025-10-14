@@ -4,7 +4,7 @@ import styles from "./Layout.module.css";
 
 export function Layout({ children }) {
   return (
-    <div>
+    <div className={styles.container}>
       <NavBar />
       <div className={styles.content}>{children}</div>
     </div>
